@@ -6,3 +6,4 @@ export * from './professor';
 export * from './contact';
 export * from './news';
 export * from './event';
+export * from './search';

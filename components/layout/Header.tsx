@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 
 const navigation = [
     { name: 'Home', href: '/' },
@@ -58,6 +58,13 @@ export default function Header() {
                                 {item.name}
                             </Link>
                         ))}
+                        <Link
+                            href="/search"
+                            className="ml-2 p-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded transition-colors"
+                            aria-label="Search"
+                        >
+                            <Search className="h-5 w-5" />
+                        </Link>
                     </div>
 
                     {/* Mobile menu button */}
@@ -95,6 +102,14 @@ export default function Header() {
                                     {item.name}
                                 </Link>
                             ))}
+                            <Link
+                                href="/search"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="flex items-center gap-2 px-4 py-3 text-base font-medium rounded text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+                            >
+                                <Search className="h-5 w-5" />
+                                Search
+                            </Link>
                         </div>
                     </div>
                 )}
