@@ -1,0 +1,97 @@
+[
+    {
+        "id": "research-001",
+        "title": "AI-driven Healthcare Diagnostic System",
+        "description": "Developing an artificial intelligence system that assists medical professionals in diagnosing diseases using medical imaging data and patient records. The project focuses on improving diagnostic accuracy while maintaining interpretability for clinical use.",
+        "imageUrl": "/images/research/healthcare-ai.jpg",
+        "status": "ongoing",
+        "startDate": "2024-03",
+        "fundingAgency": "National Research Foundation of Korea",
+        "keywords": [
+            "Healthcare",
+            "Medical Imaging",
+            "Deep Learning",
+            "Explainable AI"
+        ],
+        "relatedPublications": [
+            "pub-001",
+            "pub-013"
+        ]
+    },
+    {
+        "id": "research-002",
+        "title": "Cross-lingual Natural Language Processing",
+        "description": "Researching methods to enable natural language processing systems to work effectively across multiple languages, with a special focus on low-resource languages. This includes developing transfer learning techniques and multilingual models.",
+        "imageUrl": "/images/research/cross-lingual.jpg",
+        "status": "ongoing",
+        "startDate": "2023-09",
+        "fundingAgency": "Ministry of Science and ICT",
+        "keywords": [
+            "NLP",
+            "Cross-lingual",
+            "Transfer Learning",
+            "Low-resource Languages"
+        ],
+        "relatedPublications": [
+            "pub-004",
+            "pub-005"
+        ]
+    },
+    {
+        "id": "research-003",
+        "title": "Knowledge Graph Construction and Reasoning",
+        "description": "Building large-scale knowledge graphs from unstructured text and developing reasoning algorithms to answer complex queries. The project aims to create systems that can understand and reason about relationships between entities.",
+        "imageUrl": "/images/research/knowledge-graph.jpg",
+        "status": "ongoing",
+        "startDate": "2023-03",
+        "keywords": [
+            "Knowledge Graphs",
+            "Information Extraction",
+            "Graph Neural Networks",
+            "Reasoning"
+        ],
+        "relatedPublications": [
+            "pub-006",
+            "pub-007"
+        ]
+    },
+    {
+        "id": "research-004",
+        "title": "Efficient Large Language Model Training",
+        "description": "Investigated novel approaches for training and fine-tuning large language models more efficiently, reducing computational costs while maintaining or improving performance. Developed parameter-efficient fine-tuning methods.",
+        "imageUrl": "/images/research/llm-efficiency.jpg",
+        "status": "completed",
+        "startDate": "2022-06",
+        "endDate": "2024-05",
+        "fundingAgency": "Industry Partnership Grant",
+        "keywords": [
+            "Large Language Models",
+            "Efficient Training",
+            "Fine-tuning",
+            "Parameter Efficiency"
+        ],
+        "relatedPublications": [
+            "pub-003",
+            "pub-009"
+        ]
+    },
+    {
+        "id": "research-005",
+        "title": "Multimodal Learning for Vision and Language",
+        "description": "Explored methods for combining visual and textual information to solve tasks such as visual question answering, image captioning, and visual reasoning. Successfully developed fusion architectures that improved state-of-the-art performance.",
+        "imageUrl": "/images/research/multimodal.jpg",
+        "status": "completed",
+        "startDate": "2021-09",
+        "endDate": "2023-12",
+        "keywords": [
+            "Multimodal Learning",
+            "Computer Vision",
+            "Vision-Language",
+            "Fusion"
+        ],
+        "relatedPublications": [
+            "pub-002",
+            "pub-012"
+        ]
+    }
+]

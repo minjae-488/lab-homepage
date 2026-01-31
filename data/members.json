@@ -1,0 +1,134 @@
+[
+    {
+        "id": "member-001",
+        "name": "김민준 교수",
+        "role": "PI",
+        "degree": "Professor",
+        "researchInterest": [
+            "Natural Language Processing",
+            "Machine Learning",
+            "Knowledge Representation"
+        ],
+        "email": "minjun.kim@university.ac.kr",
+        "imageUrl": "/images/members/professor.jpg",
+        "website": "https://minjunkim.com",
+        "bio": "Leading research in NLP and AI with focus on real-world applications"
+    },
+    {
+        "id": "member-002",
+        "name": "이서연",
+        "role": "PhD",
+        "degree": "Ph.D. Candidate (4th year)",
+        "researchInterest": [
+            "Multimodal Learning",
+            "Computer Vision",
+            "Question Answering"
+        ],
+        "email": "seoyeon.lee@university.ac.kr",
+        "imageUrl": "/images/members/phd1.jpg",
+        "linkedin": "https://linkedin.com/in/seoyeon-lee"
+    },
+    {
+        "id": "member-003",
+        "name": "박지훈",
+        "role": "PhD",
+        "degree": "Ph.D. Candidate (3rd year)",
+        "researchInterest": [
+            "Deep Learning",
+            "Healthcare AI",
+            "Explainable AI"
+        ],
+        "email": "jihoon.park@university.ac.kr",
+        "imageUrl": "/images/members/phd2.jpg",
+        "website": "https://jihoonpark.dev"
+    },
+    {
+        "id": "member-004",
+        "name": "최예진",
+        "role": "PhD",
+        "degree": "Ph.D. Candidate (2nd year)",
+        "researchInterest": [
+            "Few-shot Learning",
+            "Transfer Learning",
+            "Cross-lingual NLP"
+        ],
+        "email": "yejin.choi@university.ac.kr",
+        "imageUrl": "/images/members/phd3.jpg"
+    },
+    {
+        "id": "member-005",
+        "name": "정수민",
+        "role": "MS",
+        "degree": "M.S. Student (2nd year)",
+        "researchInterest": [
+            "Speech Processing",
+            "Audio Analysis",
+            "Self-supervised Learning"
+        ],
+        "email": "sumin.jung@university.ac.kr",
+        "imageUrl": "/images/members/ms1.jpg"
+    },
+    {
+        "id": "member-006",
+        "name": "강민서",
+        "role": "MS",
+        "degree": "M.S. Student (2nd year)",
+        "researchInterest": [
+            "Information Retrieval",
+            "Text Mining",
+            "Semantic Search"
+        ],
+        "email": "minseo.kang@university.ac.kr",
+        "imageUrl": "/images/members/ms2.jpg"
+    },
+    {
+        "id": "member-007",
+        "name": "윤지우",
+        "role": "MS",
+        "degree": "M.S. Student (1st year)",
+        "researchInterest": [
+            "Recommender Systems",
+            "Graph Neural Networks",
+            "Collaborative Filtering"
+        ],
+        "email": "jiwoo.yoon@university.ac.kr",
+        "imageUrl": "/images/members/ms3.jpg"
+    },
+    {
+        "id": "member-008",
+        "name": "한승우",
+        "role": "MS",
+        "degree": "M.S. Student (1st year)",
+        "researchInterest": [
+            "Reinforcement Learning",
+            "Game AI",
+            "Multi-agent Systems"
+        ],
+        "email": "seungwoo.han@university.ac.kr",
+        "imageUrl": "/images/members/ms4.jpg"
+    },
+    {
+        "id": "member-009",
+        "name": "조현아",
+        "role": "Undergrad",
+        "degree": "Undergraduate Intern",
+        "researchInterest": [
+            "Data Mining",
+            "Machine Learning Applications"
+        ],
+        "email": "hyuna.cho@university.ac.kr",
+        "imageUrl": "/images/members/undergrad1.jpg"
+    },
+    {
+        "id": "member-010",
+        "name": "서준호",
+        "role": "Undergrad",
+        "degree": "Undergraduate Intern",
+        "researchInterest": [
+            "Web Technologies",
+            "AI Integration"
+        ],
+        "email": "junho.seo@university.ac.kr",
+        "imageUrl": "/images/members/undergrad2.jpg"
+    }
+]

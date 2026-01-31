@@ -1,0 +1,85 @@
+{
+    "name": "김민준",
+    "title": "Professor",
+    "department": "Department of Computer Science",
+    "university": "Korea University",
+    "email": "minjun.kim@university.ac.kr",
+    "phone": "+82-2-1234-5678",
+    "imageUrl": "/images/professor/profile.jpg",
+    "greeting": "Welcome to our research laboratory! We are dedicated to advancing the frontiers of artificial intelligence and natural language processing. Our research focuses on developing practical AI systems that can understand and generate human language, with applications in healthcare, education, and information access.\n\nWe believe in fostering a collaborative and inclusive research environment where students can grow both academically and personally. If you are passionate about AI and NLP research, I encourage you to reach out and explore opportunities to join our team.",
+    "education": [
+        {
+            "degree": "Ph.D. in Computer Science",
+            "major": "Natural Language Processing",
+            "university": "Stanford University",
+            "year": 2015
+        },
+        {
+            "degree": "M.S. in Computer Science",
+            "major": "Machine Learning",
+            "university": "Carnegie Mellon University",
+            "year": 2010
+        },
+        {
+            "degree": "B.S. in Computer Science",
+            "major": "Computer Science",
+            "university": "Seoul National University",
+            "year": 2008
+        }
+    ],
+    "career": [
+        {
+            "position": "Professor",
+            "institution": "Korea University",
+            "startYear": 2020
+        },
+        {
+            "position": "Associate Professor",
+            "institution": "KAIST",
+            "startYear": 2017,
+            "endYear": 2020
+        },
+        {
+            "position": "Assistant Professor",
+            "institution": "KAIST",
+            "startYear": 2015,
+            "endYear": 2017
+        },
+        {
+            "position": "Research Scientist",
+            "institution": "Google AI",
+            "startYear": 2013,
+            "endYear": 2015
+        }
+    ],
+    "awards": [
+        {
+            "title": "Best Paper Award",
+            "organization": "ACL 2024",
+            "year": 2024
+        },
+        {
+            "title": "Distinguished Research Award",
+            "organization": "Korean Institute of Information Scientists and Engineers",
+            "year": 2022
+        },
+        {
+            "title": "Early Career Award",
+            "organization": "National Research Foundation of Korea",
+            "year": 2019
+        },
+        {
+            "title": "Outstanding Dissertation Award",
+            "organization": "Stanford University",
+            "year": 2015
+        }
+    ],
+    "researchInterests": [
+        "Natural Language Processing",
+        "Machine Learning",
+        "Deep Learning",
+        "Knowledge Representation and Reasoning",
+        "Healthcare AI",
+        "Multimodal Learning"
+    ]
+}

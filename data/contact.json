@@ -1,0 +1,17 @@
+{
+    "labName": "AI & NLP Research Lab",
+    "address": {
+        "building": "Science Building",
+        "room": "Room 501",
+        "street": "145 Anam-ro, Seongbuk-gu",
+        "city": "Seoul",
+        "postalCode": "02841",
+        "country": "South Korea"
+    },
+    "phone": "+82-2-1234-5678",
+    "email": "contact@ainlp-lab.ac.kr",
+    "mapCoordinates": {
+        "lat": 37.5850,
+        "lng": 127.0290
+    }
+}

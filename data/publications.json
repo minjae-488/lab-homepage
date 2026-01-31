@@ -1,0 +1,268 @@
+[
+    {
+        "id": "pub-001",
+        "title": "Deep Learning Approaches for Natural Language Understanding in Healthcare",
+        "authors": [
+            "김민준",
+            "이서연",
+            "박지훈"
+        ],
+        "conference": "ACL 2025 (Annual Meeting of the Association for Computational Linguistics)",
+        "year": 2025,
+        "type": "conference",
+        "doi": "10.18653/v1/2025.acl-long.123",
+        "link": "https://example.com/paper1.pdf",
+        "keywords": [
+            "NLP",
+            "Healthcare",
+            "Deep Learning"
+        ],
+        "abstract": "This paper presents novel deep learning approaches for understanding medical texts and improving clinical decision support systems."
+    },
+    {
+        "id": "pub-002",
+        "title": "Transformer-based Models for Multi-modal Sentiment Analysis",
+        "authors": [
+            "이서연",
+            "김민준",
+            "최예진"
+        ],
+        "journal": "IEEE Transactions on Affective Computing",
+        "year": 2025,
+        "type": "journal",
+        "doi": "10.1109/TAFFC.2025.1234567",
+        "keywords": [
+            "Sentiment Analysis",
+            "Transformers",
+            "Multi-modal Learning"
+        ],
+        "citations": 15
+    },
+    {
+        "id": "pub-003",
+        "title": "Efficient Fine-tuning Strategies for Large Language Models",
+        "authors": [
+            "박지훈",
+            "김민준",
+            "정수민"
+        ],
+        "conference": "NeurIPS 2024 (Neural Information Processing Systems)",
+        "year": 2024,
+        "type": "conference",
+        "doi": "10.5555/neurips.2024.789",
+        "link": "https://example.com/paper3.pdf",
+        "keywords": [
+            "LLM",
+            "Fine-tuning",
+            "Parameter Efficiency"
+        ],
+        "citations": 42
+    },
+    {
+        "id": "pub-004",
+        "title": "Cross-lingual Transfer Learning for Low-resource Languages",
+        "authors": [
+            "최예진",
+            "이서연",
+            "김민준"
+        ],
+        "journal": "Computational Linguistics",
+        "year": 2024,
+        "type": "journal",
+        "doi": "10.1162/coli_a_00456",
+        "keywords": [
+            "Transfer Learning",
+            "Low-resource",
+            "Cross-lingual"
+        ],
+        "citations": 28
+    },
+    {
+        "id": "pub-005",
+        "title": "Adversarial Robustness in Neural Machine Translation",
+        "authors": [
+            "정수민",
+            "박지훈",
+            "김민준"
+        ],
+        "conference": "EMNLP 2024 (Empirical Methods in Natural Language Processing)",
+        "year": 2024,
+        "type": "conference",
+        "doi": "10.18653/v1/2024.emnlp-main.567",
+        "keywords": [
+            "Adversarial Learning",
+            "NMT",
+            "Robustness"
+        ],
+        "citations": 19
+    },
+    {
+        "id": "pub-006",
+        "title": "Attention Mechanisms for Document-level Relation Extraction",
+        "authors": [
+            "김민준",
+            "박지훈",
+            "이서연"
+        ],
+        "journal": "Artificial Intelligence",
+        "year": 2023,
+        "type": "journal",
+        "doi": "10.1016/j.artint.2023.103890",
+        "keywords": [
+            "Attention",
+            "Information Extraction",
+            "Relations"
+        ],
+        "citations": 67
+    },
+    {
+        "id": "pub-007",
+        "title": "Knowledge Graph Completion using Graph Neural Networks",
+        "authors": [
+            "이서연",
+            "최예진",
+            "김민준"
+        ],
+        "conference": "ICLR 2023 (International Conference on Learning Representations)",
+        "year": 2023,
+        "type": "conference",
+        "doi": "10.48550/arXiv.2023.iclr.456",
+        "link": "https://example.com/paper7.pdf",
+        "keywords": [
+            "Knowledge Graphs",
+            "GNN",
+            "Link Prediction"
+        ],
+        "citations": 89
+    },
+    {
+        "id": "pub-008",
+        "title": "Self-supervised Learning for Speech Recognition in Noisy Environments",
+        "authors": [
+            "박지훈",
+            "정수민",
+            "김민준"
+        ],
+        "journal": "Computer Speech & Language",
+        "year": 2023,
+        "type": "journal",
+        "doi": "10.1016/j.csl.2023.101234",
+        "keywords": [
+            "Self-supervised",
+            "Speech Recognition",
+            "Noise Robustness"
+        ],
+        "citations": 34
+    },
+    {
+        "id": "pub-009",
+        "title": "Meta-learning for Few-shot Text Classification",
+        "authors": [
+            "최예진",
+            "김민준",
+            "이서연"
+        ],
+        "conference": "ICML 2022 (International Conference on Machine Learning)",
+        "year": 2022,
+        "type": "conference",
+        "doi": "10.48550/arXiv.2022.icml.789",
+        "keywords": [
+            "Meta-learning",
+            "Few-shot Learning",
+            "Text Classification"
+        ],
+        "citations": 112
+    },
+    {
+        "id": "pub-010",
+        "title": "Bi-directional Contextualized Word Representations for Question Answering",
+        "authors": [
+            "김민준",
+            "이서연",
+            "박지훈"
+        ],
+        "journal": "Journal of Artificial Intelligence Research",
+        "year": 2022,
+        "type": "journal",
+        "doi": "10.1613/jair.1.12345",
+        "keywords": [
+            "Word Embeddings",
+            "Question Answering",
+            "Contextualization"
+        ],
+        "citations": 156
+    },
+    {
+        "id": "pub-011",
+        "title": "Neural Approaches to Code Generation and Program Synthesis",
+        "authors": [
+            "정수민",
+            "박지훈",
+            "최예진"
+        ],
+        "conference": "PLDI 2022 (Programming Language Design and Implementation)",
+        "year": 2022,
+        "type": "conference",
+        "doi": "10.1145/pldi.2022.456",
+        "keywords": [
+            "Code Generation",
+            "Program Synthesis",
+            "Neural Networks"
+        ],
+        "citations": 73
+    },
+    {
+        "id": "pub-012",
+        "title": "Multimodal Fusion for Visual Question Answering",
+        "authors": [
+            "이서연",
+            "김민준",
+            "최예진"
+        ],
+        "workshop": "CVPR 2024 Workshop on Multimodal Learning",
+        "year": 2024,
+        "type": "workshop",
+        "link": "https://example.com/paper12.pdf",
+        "keywords": [
+            "VQA",
+            "Multimodal",
+            "Fusion"
+        ]
+    },
+    {
+        "id": "pub-013",
+        "title": "Explainability in Deep Learning Models for Clinical Applications",
+        "authors": [
+            "박지훈",
+            "김민준",
+            "정수민"
+        ],
+        "workshop": "NeurIPS 2023 Workshop on Trustworthy AI",
+        "year": 2023,
+        "type": "workshop",
+        "keywords": [
+            "Explainability",
+            "XAI",
+            "Healthcare"
+        ]
+    },
+    {
+        "id": "pub-014",
+        "title": "Continual Learning in Dynamic Environments",
+        "authors": [
+            "김민준",
+            "최예진",
+            "이서연"
+        ],
+        "journal": "Neural Networks",
+        "year": 2021,
+        "type": "journal",
+        "doi": "10.1016/j.neunet.2021.09.015",
+        "keywords": [
+            "Continual Learning",
+            "Lifelong Learning",
+            "Catastrophic Forgetting"
+        ],
+        "citations": 201
+    }
+]
