@@ -1,0 +1,154 @@
+[
+    {
+        "id": "news-001",
+        "date": "2025-01-15",
+        "title": "Best Paper Award at ACL 2025 for Deep Learning Approaches in Healthcare NLP",
+        "category": "Award",
+        "summary": "Our research team received the Best Paper Award at the Annual Meeting of the Association for Computational Linguistics (ACL 2025) for groundbreaking work in healthcare NLP.",
+        "content": "The paper 'Transformer-based Clinical Note Analysis for Automated Diagnosis Support' demonstrates significant improvements in medical text understanding and has potential applications in clinical decision-making systems.",
+        "tags": [
+            "NLP",
+            "Healthcare",
+            "Deep Learning",
+            "ACL"
+        ]
+    },
+    {
+        "id": "news-002",
+        "date": "2025-01-10",
+        "title": "New ICML 2024 paper on Transformer-based Multi-modal Sentiment Analysis",
+        "category": "Publication",
+        "summary": "Our latest research on multi-modal sentiment analysis has been accepted to ICML 2024, one of the premier machine learning conferences.",
+        "content": "This work introduces a novel architecture for combining textual and visual information to improve sentiment classification accuracy across multiple domains.",
+        "tags": [
+            "Machine Learning",
+            "Multi-modal",
+            "Sentiment Analysis",
+            "ICML"
+        ]
+    },
+    {
+        "id": "news-003",
+        "date": "2024-12-20",
+        "title": "Prof. Kim appointed as Associate Editor for IEEE Transactions on AI",
+        "category": "News",
+        "summary": "Professor Kim has been appointed as an Associate Editor for IEEE Transactions on Artificial Intelligence, recognizing leadership in the AI research community.",
+        "tags": [
+            "Faculty",
+            "Recognition",
+            "IEEE"
+        ]
+    },
+    {
+        "id": "news-004",
+        "date": "2024-12-15",
+        "title": "Graduate student recruitment for Spring 2025 now open",
+        "category": "Announcement",
+        "summary": "We are actively recruiting graduate students (MS/PhD) for Spring 2025. Application deadline is January 31, 2025.",
+        "content": "We welcome applications from motivated students interested in AI, NLP, and machine learning research. Full funding available for qualified PhD candidates.",
+        "link": "/contact",
+        "tags": [
+            "Recruitment",
+            "Graduate Students"
+        ]
+    },
+    {
+        "id": "news-005",
+        "date": "2024-12-01",
+        "title": "AI Ethics Workshop - Responsible AI Development",
+        "category": "Event",
+        "summary": "Join our workshop on AI Ethics and Responsible AI Development on December 15, 2024.",
+        "content": "This workshop will bring together researchers, industry practitioners, and policymakers to discuss ethical considerations in AI development and deployment.",
+        "tags": [
+            "Workshop",
+            "AI Ethics",
+            "Event"
+        ]
+    },
+    {
+        "id": "news-006",
+        "date": "2024-11-20",
+        "title": "Collaboration with Industry Partner on Natural Language Understanding",
+        "category": "News",
+        "summary": "Our lab has initiated a new collaboration with a leading tech company to advance natural language understanding technologies.",
+        "tags": [
+            "Industry",
+            "Collaboration",
+            "NLP"
+        ]
+    },
+    {
+        "id": "news-007",
+        "date": "2024-11-10",
+        "title": "PhD Student Wins Best Student Paper at NeurIPS 2024",
+        "category": "Award",
+        "summary": "Congratulations to our PhD student for receiving the Best Student Paper Award at NeurIPS 2024.",
+        "content": "The awarded paper presents novel techniques for efficient training of large language models with reduced computational requirements.",
+        "tags": [
+            "NeurIPS",
+            "Student",
+            "Award",
+            "LLM"
+        ]
+    },
+    {
+        "id": "news-008",
+        "date": "2024-10-25",
+        "title": "New Research Grant from National Science Foundation",
+        "category": "News",
+        "summary": "Our lab has been awarded a $1.2M grant from NSF to research explainable AI for healthcare applications.",
+        "content": "This three-year grant will support research into developing interpretable machine learning models for medical diagnosis and treatment planning.",
+        "tags": [
+            "Funding",
+            "NSF",
+            "Healthcare AI"
+        ]
+    },
+    {
+        "id": "news-009",
+        "date": "2024-10-15",
+        "title": "AI & Society Symposium 2024 - Call for Papers",
+        "category": "Announcement",
+        "summary": "Call for papers for the AI & Society Symposium 2024. Submission deadline: November 30, 2024.",
+        "tags": [
+            "Symposium",
+            "Call for Papers"
+        ]
+    },
+    {
+        "id": "news-010",
+        "date": "2024-09-30",
+        "title": "Lab Member Presents at International Conference on Robotics",
+        "category": "Publication",
+        "summary": "Our research on AI-driven robotic systems was presented at ICRA 2024 in Yokohama, Japan.",
+        "tags": [
+            "Robotics",
+            "Conference",
+            "ICRA"
+        ]
+    },
+    {
+        "id": "news-011",
+        "date": "2024-09-15",
+        "title": "Keynote Speech at AI Summit Seoul 2024",
+        "category": "Event",
+        "summary": "Prof. Kim delivered a keynote speech on 'The Future of Language AI' at AI Summit Seoul 2024.",
+        "tags": [
+            "Keynote",
+            "AI Summit",
+            "Seoul"
+        ]
+    },
+    {
+        "id": "news-012",
+        "date": "2024-08-20",
+        "title": "Summer Research Internship Program Concludes Successfully",
+        "category": "News",
+        "summary": "Our summer internship program concluded with presentations from 8 undergraduate students showcasing their AI research projects.",
+        "tags": [
+            "Internship",
+            "Education",
+            "Undergraduate"
+        ]
+    }
+]

@@ -11,6 +11,7 @@ const navigation = [
     { name: 'Research', href: '/research' },
     { name: 'Members', href: '/members' },
     { name: 'Publications', href: '/publications' },
+    { name: 'News', href: '/news' },
     { name: 'Contact', href: '/contact' },
 ];
 
@@ -49,8 +50,8 @@ export default function Header() {
                                 key={item.name}
                                 href={item.href}
                                 className={`px-4 py-2 text-sm font-medium rounded transition-colors ${isActive(item.href)
-                                        ? 'text-primary-600 bg-primary-50'
-                                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                                    ? 'text-primary-600 bg-primary-50'
+                                    : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                                     }`}
                             >
                                 {item.name}
@@ -86,8 +87,8 @@ export default function Header() {
                                     href={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`block px-4 py-3 text-base font-medium rounded ${isActive(item.href)
-                                            ? 'text-primary-600 bg-primary-50'
-                                            : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                                        ? 'text-primary-600 bg-primary-50'
+                                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                                         }`}
                                 >
                                     {item.name}
