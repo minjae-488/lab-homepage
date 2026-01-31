@@ -9,12 +9,67 @@
   }
 
   * {
-    @apply border-border;
+    @apply border-gray-300;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-gray-900 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-gray-900;
+  }
+
+  a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors;
+  }
+}
+
+@layer components {
+
+  /* Academic section styling */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Academic card style */
+  .academic-card {
+    @apply bg-white border border-gray-200 rounded-lg p-6 hover:shadow-card-hover transition-shadow duration-200;
+  }
+
+  /* Page header style */
+  .page-header {
+    @apply border-b border-gray-200 bg-gray-50 py-12 mb-12;
+  }
+
+  /* News/Update item */
+  .news-item {
+    @apply border-l-4 border-primary-600 pl-4 py-2 hover:bg-gray-50 transition-colors;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply inline-flex items-center px-5 py-2.5 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-5 py-2.5 border border-primary-600 text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors;
+  }
+
+  /* Link with arrow */
+  .link-arrow::after {
+    content: ' →';
+    @apply inline-block transition-transform;
+  }
+
+  .link-arrow:hover::after {
+    @apply translate-x-1;
   }
 }
 
@@ -23,57 +78,8 @@
     text-wrap: balance;
   }
 
-  /* Custom gradient backgrounds */
-  .bg-gradient-primary {
-    @apply bg-gradient-to-br from-primary-50 via-primary-100 to-secondary-50;
-  }
-
-  .bg-gradient-accent {
-    @apply bg-gradient-to-r from-primary-600 to-accent-600;
-  }
-
-  /* Glassmorphism effect */
-  .glass {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20;
-  }
-
-  .glass-dark {
-    @apply bg-gray-900/80 backdrop-blur-lg border border-gray-700/20;
-  }
-
-  /* Smooth transitions */
-  .transition-smooth {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  /* Hover lift effect */
-  .hover-lift {
-    @apply transition-smooth hover:-translate-y-1 hover:shadow-soft-lg;
-  }
-
-  /* Text gradient */
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent;
-  }
-}
-
-@layer components {
-
-  /* Custom scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-gray-100;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
+  /* Academic gradient */
+  .bg-academic-gradient {
+    @apply bg-gradient-to-b from-white to-gray-50;
   }
 }

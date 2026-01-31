@@ -1,211 +1,225 @@
 import Link from 'next/link';
-import { BookOpen, Users, FlaskConical, Award, Sparkles, TrendingUp } from 'lucide-react';
-import { Button } from '@/components/common';
-import { IconCard } from '@/components/common/Card';
-import { Section, SectionHeader } from '@/components/common';
+import { ChevronRight, Calendar, User, FileText } from 'lucide-react';
 
 export default function Home() {
+    const latestNews = [
+        {
+            date: '2025-01-15',
+            title: 'Best Paper Award at ACL 2025 for Deep Learning Approaches in Healthcare NLP',
+            category: 'Award',
+        },
+        {
+            date: '2025-01-10',
+            title: 'New ICML 2024 paper on Transformer-based Multi-modal Sentiment Analysis',
+            category: 'Publication',
+        },
+        {
+            date: '2024-12-20',
+            title: 'Prof. Kim appointed as Associate Editor for IEEE Transactions on AI',
+            category: 'News',
+        },
+        {
+            date: '2024-12-15',
+            title: 'Graduate student recruitment for Spring 2025 now open',
+            category: 'Announcement',
+        },
+    ];
+
+    const featuredResearch = [
+        {
+            title: 'AI-driven Healthcare Diagnostic System',
+            description: 'Developing diagnostic support systems using deep learning and medical imaging for improved clinical decision-making.',
+            type: 'Ongoing Project',
+        },
+        {
+            title: 'Cross-lingual Natural Language Processing',
+            description: 'Advancing NLP capabilities across multiple languages with focus on low-resource scenarios.',
+            type: 'Funded Research',
+        },
+        {
+            title: 'Knowledge Graph Construction and Reasoning',
+            description: 'Building large-scale knowledge graphs with advanced reasoning capabilities for complex queries.',
+            type: 'Collaborative Project',
+        },
+    ];
+
     return (
-        <div className="overflow-hidden">
-            {/* Hero Section with enhanced design */}
-            <section className="relative bg-gradient-primary py-24 md:py-32 overflow-hidden">
-                {/* Decorative elements */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-300/30 rounded-full blur-3xl"></div>
-                    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-300/30 rounded-full blur-3xl"></div>
-                </div>
-
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm shadow-soft mb-6">
-                            <Sparkles className="h-4 w-4 text-primary-600" />
-                            <span className="text-sm font-medium text-gray-700">Leading AI & NLP Research</span>
-                        </div>
-
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-                            Advancing AI &{' '}
-                            <span className="text-gradient">NLP Research</span>
+        <div className="min-h-screen bg-white">
+            {/* Hero Section - Clean and Academic */}
+            <section className="bg-academic-gradient border-b border-gray-200">
+                <div className="section-container py-16 md:py-24">
+                    <div className="max-w-4xl">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                            AI & NLP Research Laboratory
                         </h1>
-
-                        <p className="text-lg md:text-xl lg:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
-                            Pioneering innovative solutions in artificial intelligence and natural language processing to solve real-world challenges
+                        <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+                            Advancing artificial intelligence and natural language processing through innovative research and collaboration
                         </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="/research">
-                                <Button variant="gradient" size="lg" className="w-full sm:w-auto">
-                                    Explore Research
-                                </Button>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Link href="/research" className="btn-primary">
+                                View Research
                             </Link>
-                            <Link href="/publications">
-                                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                    View Publications
-                                </Button>
+                            <Link href="/publications" className="btn-secondary">
+                                Publications
                             </Link>
                         </div>
+                    </div>
+                </div>
+            </section>
 
-                        {/* Trust indicators */}
-                        <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-600">
-                            <div className="flex items-center gap-2">
-                                <Award className="h-5 w-5 text-primary-600" />
-                                <span>Award-winning Research</span>
+            {/* Stats Bar */}
+            <section className="bg-primary-600 text-white py-8">
+                <div className="section-container">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <div className="text-3xl md:text-4xl font-bold mb-1">14+</div>
+                            <div className="text-sm md:text-base text-primary-100">Publications</div>
+                        </div>
+                        <div>
+                            <div className="text-3xl md:text-4xl font-bold mb-1">10</div>
+                            <div className="text-sm md:text-base text-primary-100">Researchers</div>
+                        </div>
+                        <div>
+                            <div className="text-3xl md:text-4xl font-bold mb-1">5+</div>
+                            <div className="text-sm md:text-base text-primary-100">Active Projects</div>
+                        </div>
+                        <div>
+                            <div className="text-3xl md:text-4xl font-bold mb-1">200+</div>
+                            <div className="text-sm md:text-base text-primary-100">Citations</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Main Content - Two Column Layout */}
+            <section className="py-12 md:py-16">
+                <div className="section-container">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        {/* Main Column */}
+                        <div className="lg:col-span-2 space-y-12">
+                            {/* Latest News */}
+                            <div>
+                                <div className="flex items-center justify-between mb-6">
+                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Latest News</h2>
+                                    <Link href="/news" className="text-primary-600 hover:text-primary-700 font-medium link-arrow">
+                                        View all
+                                    </Link>
+                                </div>
+                                <div className="space-y-4">
+                                    {latestNews.map((news, index) => (
+                                        <article key={index} className="news-item">
+                                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                                                <span className="inline-flex items-center text-sm text-gray-500">
+                                                    <Calendar className="h-4 w-4 mr-1" />
+                                                    {new Date(news.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                </span>
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-100 text-secondary-800">
+                                                    {news.category}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                                                <Link href="#">{news.title}</Link>
+                                            </h3>
+                                        </article>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <TrendingUp className="h-5 w-5 text-secondary-600" />
-                                <span>200+ Citations</span>
+
+                            {/* Featured Research */}
+                            <div>
+                                <div className="flex items-center justify-between mb-6">
+                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Featured Research</h2>
+                                    <Link href="/research" className="text-primary-600 hover:text-primary-700 font-medium link-arrow">
+                                        All projects
+                                    </Link>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {featuredResearch.map((project, index) => (
+                                        <div key={index} className="academic-card">
+                                            <div className="mb-3">
+                                                <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-accent-100 text-accent-800">
+                                                    {project.type}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
+                                            <p className="text-sm text-gray-600 mb-4">{project.description}</p>
+                                            <Link href="/research" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
+                                                Learn more
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Users className="h-5 w-5 text-accent-600" />
-                                <span>10+ Researchers</span>
+                        </div>
+
+                        {/* Sidebar */}
+                        <div className="space-y-8">
+                            {/* About Lab */}
+                            <div className="academic-card">
+                                <h3 className="text-xl font-bold text-gray-900 mb-4">About the Lab</h3>
+                                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                                    We are a leading research group in artificial intelligence and natural language processing at Korea University, dedicated to advancing the state-of-the-art through innovative research and collaboration.
+                                </p>
+                                <Link href="/about" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
+                                    Learn more about us
+                                </Link>
+                            </div>
+
+                            {/* Quick Links */}
+                            <div className="academic-card">
+                                <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Links</h3>
+                                <ul className="space-y-3">
+                                    <li>
+                                        <Link href="/members" className="flex items-center text-sm text-gray-700 hover:text-primary-600 transition-colors">
+                                            <User className="h-4 w-4 mr-2" />
+                                            Our Team
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/publications" className="flex items-center text-sm text-gray-700 hover:text-primary-600 transition-colors">
+                                            <FileText className="h-4 w-4 mr-2" />
+                                            Publications
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/contact" className="flex items-center text-sm text-gray-700 hover:text-primary-600 transition-colors">
+                                            <ChevronRight className="h-4 w-4 mr-2" />
+                                            Join Our Lab
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {/* Recent Publication */}
+                            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                                <h3 className="text-lg font-bold text-gray-900 mb-3">Recent Publication</h3>
+                                <div className="mb-3">
+                                    <h4 className="text-sm font-semibold text-gray-900 mb-1">
+                                        Deep Learning Approaches for Natural Language Understanding in Healthcare
+                                    </h4>
+                                    <p className="text-xs text-gray-600">
+                                        ACL 2025 | Kim, Lee, Park
+                                    </p>
+                                </div>
+                                <Link href="/publications" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
+                                    View publication
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Statistics Section with modern design */}
-            <section className="py-12 bg-white border-y border-gray-100">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {[
-                            { value: '14+', label: 'Publications', delay: '0s' },
-                            { value: '10', label: 'Team Members', delay: '0.1s' },
-                            { value: '5+', label: 'Research Projects', delay: '0.2s' },
-                            { value: '200+', label: 'Citations', delay: '0.3s' },
-                        ].map((stat, index) => (
-                            <div
-                                key={index}
-                                className="text-center animate-fade-in-up"
-                                style={{ animationDelay: stat.delay }}
-                            >
-                                <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">
-                                    {stat.value}
-                                </div>
-                                <div className="text-sm md:text-base text-gray-600 uppercase tracking-wide">
-                                    {stat.label}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Features Section with IconCard */}
-            <Section variant="default">
-                <SectionHeader
-                    title="Our Focus Areas"
-                    subtitle="Explore our cutting-edge research and academic contributions"
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                    <IconCard
-                        icon={FlaskConical}
-                        title="Research"
-                        description="Cutting-edge projects in AI, NLP, and machine learning with real-world applications"
-                        iconColor="text-primary-700"
-                        iconBgColor="bg-primary-100"
-                        link={{ href: '/research', text: 'Learn more' }}
-                    />
-
-                    <IconCard
-                        icon={BookOpen}
-                        title="Publications"
-                        description="High-impact papers in top-tier conferences and journals"
-                        iconColor="text-secondary-700"
-                        iconBgColor="bg-secondary-100"
-                        link={{ href: '/publications', text: 'Browse papers' }}
-                    />
-
-                    <IconCard
-                        icon={Users}
-                        title="Team"
-                        description="Talented researchers and students passionate about advancing AI"
-                        iconColor="text-accent-700"
-                        iconBgColor="bg-accent-100"
-                        link={{ href: '/members', text: 'Meet the team' }}
-                    />
-
-                    <IconCard
-                        icon={Award}
-                        title="Excellence"
-                        description="Award-winning research recognized by the academic community"
-                        iconColor="text-primary-700"
-                        iconBgColor="bg-primary-100"
-                        link={{ href: '/about', text: 'Our achievements' }}
-                    />
-                </div>
-            </Section>
-
-            {/* Research Highlights Section */}
-            <Section variant="gradient">
-                <SectionHeader
-                    title="Research Highlights"
-                    subtitle="Discover our latest breakthroughs and innovations"
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[
-                        {
-                            title: 'AI-driven Healthcare',
-                            description: 'Developing diagnostic systems using deep learning and medical imaging',
-                            tag: 'Ongoing',
-                        },
-                        {
-                            title: 'Cross-lingual NLP',
-                            description: 'Enabling language processing across multiple languages and low-resource scenarios',
-                            tag: 'Funded',
-                        },
-                        {
-                            title: 'Knowledge Graphs',
-                            description: 'Building large-scale knowledge graphs with reasoning capabilities',
-                            tag: 'Collaborative',
-                        },
-                    ].map((project, index) => (
-                        <div
-                            key={index}
-                            className="glass rounded-xl p-6 hover-lift"
-                        >
-                            <span className="inline-block px-3 py-1 text-xs font-semibold text-primary-700 bg-primary-100 rounded-full mb-4">
-                                {project.tag}
-                            </span>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                            <p className="text-gray-600">{project.description}</p>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="text-center mt-12">
-                    <Link href="/research">
-                        <Button variant="primary" size="lg">
-                            View All Projects
-                        </Button>
+            {/* CTA Section */}
+            <section className="bg-gray-900 text-white py-16">
+                <div className="section-container text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Research Group</h2>
+                    <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                        We are looking for passionate graduate students and researchers interested in AI and NLP
+                    </p>
+                    <Link href="/contact" className="inline-flex items-center px-6 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-gray-900 transition-colors">
+                        Contact Us
                     </Link>
-                </div>
-            </Section>
-
-            {/* CTA Section with enhanced design */}
-            <section className="relative py-20 bg-gradient-accent overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                    <div className="max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                            Interested in Joining Our Lab?
-                        </h2>
-                        <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed">
-                            We're always looking for passionate students and researchers to join our team and contribute to cutting-edge AI research
-                        </p>
-                        <Link href="/contact">
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="border-white text-white hover:bg-white hover:text-primary-700"
-                            >
-                                Get in Touch
-                            </Button>
-                        </Link>
-                    </div>
                 </div>
             </section>
         </div>
