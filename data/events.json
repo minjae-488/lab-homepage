@@ -1,0 +1,162 @@
+[
+    {
+        "id": "event-001",
+        "title": "AI in Healthcare: Current Trends and Future Directions",
+        "type": "Seminar",
+        "date": "2025-02-15",
+        "time": "14:00",
+        "location": "Science Building, Room 501",
+        "speaker": "Dr. Sarah Johnson, Stanford Medical AI Lab",
+        "description": "An overview of recent advances in AI applications for healthcare, including diagnostic systems, treatment planning, and patient monitoring.",
+        "status": "Upcoming",
+        "tags": [
+            "Healthcare",
+            "AI",
+            "Seminar"
+        ]
+    },
+    {
+        "id": "event-002",
+        "title": "Weekly Research Seminar - Transformer Architectures",
+        "type": "Seminar",
+        "date": "2025-02-08",
+        "time": "15:00",
+        "location": "Science Building, Room 301",
+        "speaker": "PhD Candidate MinJi Park",
+        "description": "Discussion of recent innovations in transformer-based models for natural language processing.",
+        "status": "Upcoming",
+        "tags": [
+            "NLP",
+            "Transformers",
+            "Deep Learning"
+        ]
+    },
+    {
+        "id": "event-003",
+        "title": "Deep Learning Workshop for Beginners",
+        "type": "Workshop",
+        "date": "2025-03-01",
+        "endDate": "2025-03-02",
+        "time": "09:00",
+        "location": "Computer Science Building, Lab 201",
+        "description": "Hands-on workshop covering fundamentals of deep learning, including neural networks, backpropagation, and PyTorch basics. Open to undergraduate and graduate students.",
+        "registrationLink": "/contact",
+        "status": "Upcoming",
+        "tags": [
+            "Workshop",
+            "Deep Learning",
+            "Education"
+        ]
+    },
+    {
+        "id": "event-004",
+        "title": "PhD Thesis Defense: Multi-modal Learning for Visual Question Answering",
+        "type": "Defense",
+        "date": "2025-02-20",
+        "time": "13:00",
+        "location": "Science Building, Auditorium",
+        "speaker": "Joon Ho Lee",
+        "description": "PhD thesis defense examining novel approaches to integrating visual and textual information for improved question answering performance.",
+        "status": "Upcoming",
+        "tags": [
+            "Defense",
+            "Multi-modal",
+            "VQA"
+        ]
+    },
+    {
+        "id": "event-005",
+        "title": "AI & Society Symposium 2025",
+        "type": "Symposium",
+        "date": "2025-04-10",
+        "endDate": "2025-04-11",
+        "time": "09:00",
+        "location": "Grand Conference Hall, Korea University",
+        "description": "Two-day symposium bringing together researchers, policymakers, and industry leaders to discuss ethical considerations and societal impacts of AI technologies.",
+        "registrationLink": "/contact",
+        "status": "Upcoming",
+        "tags": [
+            "Symposium",
+            "AI Ethics",
+            "Policy"
+        ]
+    },
+    {
+        "id": "event-006",
+        "title": "Lab Social Event - Spring 2025",
+        "type": "Social",
+        "date": "2025-03-15",
+        "time": "18:00",
+        "location": "Campus Garden Restaurant",
+        "description": "Informal social gathering for lab members to celebrate the new semester. All members and alumni welcome!",
+        "status": "Upcoming",
+        "tags": [
+            "Social",
+            "Lab Event"
+        ]
+    },
+    {
+        "id": "event-007",
+        "title": "Guest Lecture: Reinforcement Learning in Robotics",
+        "type": "Seminar",
+        "date": "2025-01-25",
+        "time": "14:00",
+        "location": "Science Building, Room 501",
+        "speaker": "Prof. Michael Chen, MIT CSAIL",
+        "description": "Exploring how reinforcement learning techniques are being applied to robotics challenges, from manipulation to navigation.",
+        "status": "Past",
+        "tags": [
+            "Robotics",
+            "Reinforcement Learning",
+            "Guest Lecture"
+        ]
+    },
+    {
+        "id": "event-008",
+        "title": "ICML 2024 Paper Reading Group",
+        "type": "Seminar",
+        "date": "2025-01-18",
+        "time": "15:00",
+        "location": "Science Building, Room 301",
+        "description": "Weekly reading group session discussing selected papers from ICML 2024.",
+        "status": "Past",
+        "tags": [
+            "Reading Group",
+            "ICML",
+            "Machine Learning"
+        ]
+    },
+    {
+        "id": "event-009",
+        "title": "Natural Language Processing Conference (NLPC) 2025",
+        "type": "Conference",
+        "date": "2025-05-20",
+        "endDate": "2025-05-23",
+        "time": "09:00",
+        "location": "Seoul Convention Center",
+        "description": "Premier international conference on natural language processing. Lab members will be presenting 3 papers.",
+        "registrationLink": "https://nlpc2025.org",
+        "status": "Upcoming",
+        "tags": [
+            "Conference",
+            "NLP",
+            "International"
+        ]
+    },
+    {
+        "id": "event-010",
+        "title": "Master's Thesis Defense: Attention Mechanisms in Neural Machine Translation",
+        "type": "Defense",
+        "date": "2025-01-30",
+        "time": "10:00",
+        "location": "Science Building, Room 401",
+        "speaker": "Yuna Kim",
+        "description": "Master's thesis defense exploring novel attention mechanisms to improve neural machine translation quality.",
+        "status": "Upcoming",
+        "tags": [
+            "Defense",
+            "NMT",
+            "Attention"
+        ]
+    }
+]

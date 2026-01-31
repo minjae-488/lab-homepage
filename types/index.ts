@@ -5,3 +5,4 @@ export * from './research';
 export * from './professor';
 export * from './contact';
 export * from './news';
+export * from './event';
