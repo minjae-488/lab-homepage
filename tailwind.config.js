@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
     content: [
         "./pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,23 +8,22 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // Academic blue palette inspired by MIT/Stanford/Berkeley
                 primary: {
-                    DEFAULT: '#003262', // Berkeley Blue
+                    DEFAULT: '#003262',
                     50: '#E8F0F8',
                     100: '#D1E1F1',
                     200: '#A3C3E3',
                     300: '#75A5D5',
                     400: '#4787C7',
                     500: '#1969B9',
-                    600: '#003262', // Main
+                    600: '#003262',
                     700: '#002447',
                     800: '#001829',
                     900: '#000C14',
                     950: '#00060A',
                 },
                 secondary: {
-                    DEFAULT: '#C4820E', // California Gold
+                    DEFAULT: '#C4820E',
                     50: '#FEF7E8',
                     100: '#FDEFD1',
                     200: '#FBDFA3',
@@ -39,7 +37,7 @@ const config: Config = {
                     950: '#181002',
                 },
                 accent: {
-                    DEFAULT: '#3B7EA1', // Academic teal
+                    DEFAULT: '#3B7EA1',
                     50: '#EBF4F8',
                     100: '#D7E9F1',
                     200: '#AFD3E3',
@@ -72,13 +70,13 @@ const config: Config = {
                 mono: ['Consolas', 'Monaco', 'Courier New', 'monospace'],
             },
             fontSize: {
-                'hero': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
-                'display': ['2.5rem', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
+                hero: ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
+                display: ['2.5rem', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
             },
             spacing: {
-                '18': '4.5rem',
-                '88': '22rem',
-                '128': '32rem',
+                18: '4.5rem',
+                88: '22rem',
+                128: '32rem',
             },
             maxWidth: {
                 '8xl': '88rem',
@@ -99,13 +97,11 @@ const config: Config = {
                 },
             },
             boxShadow: {
-                'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
-                'card': '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)',
+                subtle: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+                card: '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)',
                 'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
             },
         },
     },
     plugins: [],
-};
-
-export default config;
+}
