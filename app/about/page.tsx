@@ -22,10 +22,10 @@ export default function AboutPage() {
                     {/* Professor Profile */}
                     <div className="academic-card mb-12">
                         <div className="flex flex-col md:flex-row gap-8">
-                            {professorData.photo && (
+                            {professorData.imageUrl && (
                                 <div className="w-48 h-48 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
                                     <img
-                                        src={professorData.photo}
+                                        src={professorData.imageUrl}
                                         alt={professorData.name}
                                         className="w-full h-full object-cover"
                                     />
@@ -34,7 +34,7 @@ export default function AboutPage() {
                             <div className="flex-1">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-2">{professorData.name}</h2>
                                 <p className="text-xl text-gray-600 mb-4">{professorData.title}</p>
-                                <p className="text-gray-700 mb-6 leading-relaxed">{professorData.bio}</p>
+                                <p className="text-gray-700 mb-6 leading-relaxed whitespace-pre-line">{professorData.greeting}</p>
                                 <div className="flex flex-wrap gap-4">
                                     <a
                                         href={`mailto:${professorData.email}`}
@@ -76,11 +76,8 @@ export default function AboutPage() {
                             {professorData.education.map((edu, idx) => (
                                 <div key={idx} className="border-l-4 border-primary-600 pl-4 py-2">
                                     <div className="font-semibold text-gray-900">{edu.degree}</div>
-                                    <div className="text-gray-700">{edu.institution}</div>
+                                    <div className="text-gray-700">{edu.university}</div>
                                     <div className="text-sm text-gray-600">{edu.year}</div>
-                                    {edu.thesis && (
-                                        <div className="text-sm text-gray-600 mt-1 italic">Thesis: {edu.thesis}</div>
-                                    )}
                                 </div>
                             ))}
                         </div>
@@ -97,7 +94,9 @@ export default function AboutPage() {
                                 <div key={idx} className="border-l-4 border-secondary-600 pl-4 py-2">
                                     <div className="font-semibold text-gray-900">{position.position}</div>
                                     <div className="text-gray-700">{position.institution}</div>
-                                    <div className="text-sm text-gray-600">{position.period}</div>
+                                    <div className="text-sm text-gray-600">
+                                        {position.startYear}{position.endYear ? ` - ${position.endYear}` : ' - Present'}
+                                    </div>
                                 </div>
                             ))}
                         </div>

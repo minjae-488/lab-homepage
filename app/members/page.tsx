@@ -46,10 +46,10 @@ export default function MembersPage() {
                             {groupedMembers.PI.map((member) => (
                                 <div key={member.id} className="academic-card">
                                     <div className="flex flex-col md:flex-row gap-6">
-                                        {member.photo && (
+                                        {member.imageUrl && (
                                             <div className="w-32 h-32 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
                                                 <img
-                                                    src={member.photo}
+                                                    src={member.imageUrl}
                                                     alt={member.name}
                                                     className="w-full h-full object-cover"
                                                 />
@@ -57,8 +57,8 @@ export default function MembersPage() {
                                         )}
                                         <div className="flex-1">
                                             <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                                            {member.title && (
-                                                <p className="text-lg text-gray-600 mb-4">{member.title}</p>
+                                            {member.degree && (
+                                                <p className="text-lg text-gray-600 mb-4">{member.degree}</p>
                                             )}
                                             {member.bio && (
                                                 <p className="text-gray-700 mb-4">{member.bio}</p>
@@ -73,18 +73,12 @@ export default function MembersPage() {
                                                         {member.email}
                                                     </a>
                                                 )}
-                                                {member.office && (
-                                                    <span className="inline-flex items-center">
-                                                        <Building className="h-4 w-4 mr-1" />
-                                                        {member.office}
-                                                    </span>
-                                                )}
                                             </div>
-                                            {member.interests && member.interests.length > 0 && (
+                                            {member.researchInterest && member.researchInterest.length > 0 && (
                                                 <div className="mt-4">
                                                     <p className="text-sm font-medium text-gray-700 mb-2">Research Interests:</p>
                                                     <div className="flex flex-wrap gap-2">
-                                                        {member.interests.map((interest, idx) => (
+                                                        {member.researchInterest.map((interest, idx) => (
                                                             <span
                                                                 key={idx}
                                                                 className="px-3 py-1 bg-primary-50 text-primary-700 text-sm rounded-full"
@@ -110,10 +104,10 @@ export default function MembersPage() {
                                 {groupedMembers.PhD.map((member) => (
                                     <div key={member.id} className="academic-card">
                                         <div className="flex items-start gap-4">
-                                            {member.photo && (
+                                            {member.imageUrl && (
                                                 <div className="w-20 h-20 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
                                                     <img
-                                                        src={member.photo}
+                                                        src={member.imageUrl}
                                                         alt={member.name}
                                                         className="w-full h-full object-cover"
                                                     />
@@ -121,8 +115,8 @@ export default function MembersPage() {
                                             )}
                                             <div className="flex-1 min-w-0">
                                                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{member.name}</h3>
-                                                {member.title && (
-                                                    <p className="text-sm text-gray-600 mb-2">{member.title}</p>
+                                                {member.degree && (
+                                                    <p className="text-sm text-gray-600 mb-2">{member.degree}</p>
                                                 )}
                                                 {member.email && (
                                                     <a
@@ -133,10 +127,10 @@ export default function MembersPage() {
                                                         {member.email}
                                                     </a>
                                                 )}
-                                                {member.interests && member.interests.length > 0 && (
+                                                {member.researchInterest && member.researchInterest.length > 0 && (
                                                     <div className="mt-3">
                                                         <div className="flex flex-wrap gap-1">
-                                                            {member.interests.slice(0, 3).map((interest, idx) => (
+                                                            {member.researchInterest.slice(0, 3).map((interest, idx) => (
                                                                 <span
                                                                     key={idx}
                                                                     className="px-2 py-0.5 bg-primary-50 text-primary-700 text-xs rounded"
@@ -172,10 +166,10 @@ export default function MembersPage() {
                                                 Email
                                             </a>
                                         )}
-                                        {member.interests && member.interests.length > 0 && (
+                                        {member.researchInterest && member.researchInterest.length > 0 && (
                                             <div className="mt-2">
                                                 <div className="flex flex-wrap gap-1">
-                                                    {member.interests.slice(0, 2).map((interest, idx) => (
+                                                    {member.researchInterest.slice(0, 2).map((interest, idx) => (
                                                         <span
                                                             key={idx}
                                                             className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded"
@@ -200,8 +194,8 @@ export default function MembersPage() {
                                 {groupedMembers.Undergrad.map((member) => (
                                     <div key={member.id} className="academic-card text-center">
                                         <h3 className="text-base font-semibold text-gray-900">{member.name}</h3>
-                                        {member.year && (
-                                            <p className="text-sm text-gray-600 mt-1">{member.year}</p>
+                                        {member.degree && (
+                                            <p className="text-sm text-gray-600 mt-1">{member.degree}</p>
                                         )}
                                     </div>
                                 ))}

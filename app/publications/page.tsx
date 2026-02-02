@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { ArrowLeft, FileText, ExternalLink, Calendar, Users } from 'lucide-react';
 import publicationsData from '@/data/publications.json';
 
-type PublicationType = 'Conference' | 'Journal' | 'Workshop' | 'Preprint';
+type PublicationType = 'conference' | 'journal' | 'workshop';
 
 export default function PublicationsPage() {
-    const [selectedType, setSelectedType] = useState<PublicationType | 'All'>('All');
-    const [selectedYear, setSelectedYear] = useState<number | 'All'>('All');
+    const [selectedType, setSelectedType] = useState<PublicationType | 'all'>('all');
+    const [selectedYear, setSelectedYear] = useState<number | 'all'>('all');
     const [sortBy, setSortBy] = useState<'date' | 'citations'>('date');
 
     // Get unique years
@@ -23,12 +23,12 @@ export default function PublicationsPage() {
         let filtered = [...publicationsData];
 
         // Filter by type
-        if (selectedType !== 'All') {
+        if (selectedType !== 'all') {
             filtered = filtered.filter(pub => pub.type === selectedType);
         }
 
         // Filter by year
-        if (selectedYear !== 'All') {
+        if (selectedYear !== 'all') {
             filtered = filtered.filter(pub => pub.year === selectedYear);
         }
 
@@ -45,10 +45,15 @@ export default function PublicationsPage() {
     }, [selectedType, selectedYear, sortBy]);
 
     const typeColors: Record<PublicationType, string> = {
-        Conference: 'bg-primary-100 text-primary-800',
-        Journal: 'bg-secondary-100 text-secondary-800',
-        Workshop: 'bg-accent-100 text-accent-800',
-        Preprint: 'bg-gray-100 text-gray-800',
+        conference: 'bg-primary-100 text-primary-800',
+        journal: 'bg-secondary-100 text-secondary-800',
+        workshop: 'bg-accent-100 text-accent-800',
+    };
+
+    const typeLabels: Record<PublicationType, string> = {
+        conference: 'Conference',
+        journal: 'Journal',
+        workshop: 'Workshop',
     };
 
     return (
@@ -75,14 +80,13 @@ export default function PublicationsPage() {
                         <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
                         <select
                             value={selectedType}
-                            onChange={(e) => setSelectedType(e.target.value as PublicationType | 'All')}
+                            onChange={(e) => setSelectedType(e.target.value as PublicationType | 'all')}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         >
-                            <option value="All">All Types</option>
-                            <option value="Conference">Conference</option>
-                            <option value="Journal">Journal</option>
-                            <option value="Workshop">Workshop</option>
-                            <option value="Preprint">Preprint</option>
+                            <option value="all">All Types</option>
+                            <option value="conference">Conference</option>
+                            <option value="journal">Journal</option>
+                            <option value="workshop">Workshop</option>
                         </select>
                     </div>
 
@@ -91,10 +95,10 @@ export default function PublicationsPage() {
                         <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
                         <select
                             value={selectedYear}
-                            onChange={(e) => setSelectedYear(e.target.value === 'All' ? 'All' : parseInt(e.target.value))}
+                            onChange={(e) => setSelectedYear(e.target.value === 'all' ? 'all' : parseInt(e.target.value))}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         >
-                            <option value="All">All Years</option>
+                            <option value="all">All Years</option>
                             {years.map(year => (
                                 <option key={year} value={year}>{year}</option>
                             ))}
@@ -117,85 +121,72 @@ export default function PublicationsPage() {
 
                 {/* Publications List */}
                 <div className="space-y-6">
-                    {filteredPublications.map((pub) => (
-                        <article key={pub.id} className="academic-card">
-                            <div className="flex items-start justify-between gap-4 mb-3">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeColors[pub.type as PublicationType]}`}>
-                                            {pub.type}
-                                        </span>
-                                        {pub.award && (
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                🏆 {pub.award}
+                    {filteredPublications.map((pub) => {
+                        const venue = pub.conference || pub.journal || pub.workshop || 'Unknown Venue';
+
+                        return (
+                            <article key={pub.id} className="academic-card">
+                                <div className="flex items-start justify-between gap-4 mb-3">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeColors[pub.type as PublicationType]}`}>
+                                                {typeLabels[pub.type as PublicationType]}
                                             </span>
-                                        )}
+                                        </div>
+                                        <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                                            {pub.title}
+                                        </h2>
                                     </div>
-                                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                                        {pub.title}
-                                    </h2>
                                 </div>
-                            </div>
 
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                                <div className="flex items-center gap-1">
-                                    <Users className="h-4 w-4" />
-                                    <span>{pub.authors.join(', ')}</span>
-                                </div>
-                                <div className="flex items-center gap-1">
-                                    <Calendar className="h-4 w-4" />
-                                    <span>{pub.year}</span>
-                                </div>
-                                {pub.citations !== undefined && (
+                                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
                                     <div className="flex items-center gap-1">
-                                        <FileText className="h-4 w-4" />
-                                        <span>{pub.citations} citations</span>
+                                        <Users className="h-4 w-4" />
+                                        <span>{pub.authors.join(', ')}</span>
                                     </div>
-                                )}
-                            </div>
+                                    <div className="flex items-center gap-1">
+                                        <Calendar className="h-4 w-4" />
+                                        <span>{pub.year}</span>
+                                    </div>
+                                    {pub.citations !== undefined && (
+                                        <div className="flex items-center gap-1">
+                                            <FileText className="h-4 w-4" />
+                                            <span>{pub.citations} citations</span>
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div className="text-sm text-gray-700 mb-4">
-                                <span className="font-medium">{pub.venue}</span>
-                                {pub.pages && <span className="text-gray-500"> • pp. {pub.pages}</span>}
-                            </div>
+                                <div className="text-sm text-gray-700 mb-4">
+                                    <span className="font-medium">{venue}</span>
+                                </div>
 
-                            <div className="flex flex-wrap gap-3">
-                                {pub.pdf && (
-                                    <a
-                                        href={pub.pdf}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700"
-                                    >
-                                        <FileText className="h-4 w-4 mr-1" />
-                                        PDF
-                                    </a>
-                                )}
-                                {pub.doi && (
-                                    <a
-                                        href={`https://doi.org/${pub.doi}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700"
-                                    >
-                                        <ExternalLink className="h-4 w-4 mr-1" />
-                                        DOI
-                                    </a>
-                                )}
-                                {pub.code && (
-                                    <a
-                                        href={pub.code}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700"
-                                    >
-                                        <ExternalLink className="h-4 w-4 mr-1" />
-                                        Code
-                                    </a>
-                                )}
-                            </div>
-                        </article>
-                    ))}
+                                <div className="flex flex-wrap gap-3">
+                                    {pub.link && (
+                                        <a
+                                            href={pub.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700"
+                                        >
+                                            <FileText className="h-4 w-4 mr-1" />
+                                            PDF
+                                        </a>
+                                    )}
+                                    {pub.doi && (
+                                        <a
+                                            href={`https://doi.org/${pub.doi}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700"
+                                        >
+                                            <ExternalLink className="h-4 w-4 mr-1" />
+                                            DOI
+                                        </a>
+                                    )}
+                                </div>
+                            </article>
+                        );
+                    })}
 
                     {filteredPublications.length === 0 && (
                         <div className="text-center py-12 text-gray-500">
