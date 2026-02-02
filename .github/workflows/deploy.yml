@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # main 브랜치에 push할 때 자동 배포
+      - master  # master 브랜치에 push할 때 자동 배포
   workflow_dispatch:  # 수동으로도 배포 가능
 
 # GitHub Pages에 배포할 권한 설정
