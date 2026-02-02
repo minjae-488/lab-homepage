@@ -1,5 +1,8 @@
 # 🎓 학술 연구실 홈페이지
 > Academic Research Lab Official Website
+> 
+> [![Deploy to GitHub Pages](https://github.com/minjae-488/lab-homepage/actions/workflows/deploy.yml/badge.svg)](https://github.com/minjae-488/lab-homepage/actions/workflows/deploy.yml)
+> [![Live Demo](https://img.shields.io/badge/Live-Demo-2ea44f?style=flat-square&logo=github)](https://minjae-488.github.io/lab-homepage/)
 
 [![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
