@@ -52,7 +52,7 @@ export default function EventsPage() {
         });
     };
 
-    const isMultiDay = (event: any) => {
+    const isMultiDay = (event: typeof eventsData[0]) => {
         return event.endDate && event.endDate !== event.date;
     };
 
@@ -84,8 +84,8 @@ export default function EventsPage() {
                                     key={status}
                                     onClick={() => setSelectedStatus(status)}
                                     className={`px-4 py-2 rounded-md font-medium transition-colors ${selectedStatus === status
-                                            ? 'bg-primary-600 text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                         }`}
                                 >
                                     {status}
