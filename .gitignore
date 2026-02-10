@@ -26,6 +26,9 @@ dist/
 # Vercel
 .vercel
 
+# Sanity
+.sanity/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
