@@ -1,29 +1,13 @@
 import Link from 'next/link';
 import { ChevronRight, Calendar, User, FileText } from 'lucide-react';
+import { safeFetch } from '@/lib/sanity/client';
+import { latestNewsQuery } from '@/lib/sanity/queries';
+import { NewsItem } from '@/types/sanity';
 
-export default function Home() {
-    const latestNews = [
-        {
-            date: '2025-01-15',
-            title: 'Best Paper Award at ACL 2025 for Deep Learning Approaches in Healthcare NLP',
-            category: 'Award',
-        },
-        {
-            date: '2025-01-10',
-            title: 'New ICML 2024 paper on Transformer-based Multi-modal Sentiment Analysis',
-            category: 'Publication',
-        },
-        {
-            date: '2024-12-20',
-            title: 'Prof. Kim appointed as Associate Editor for IEEE Transactions on AI',
-            category: 'News',
-        },
-        {
-            date: '2024-12-15',
-            title: 'Graduate student recruitment for Spring 2025 now open',
-            category: 'Announcement',
-        },
-    ];
+
+
+export default async function Home() {
+    const latestNews: NewsItem[] = await safeFetch(latestNewsQuery);
 
     const featuredResearch = [
         {
@@ -42,6 +26,14 @@ export default function Home() {
             type: 'Collaborative Project',
         },
     ];
+
+    const categoryColors: Record<string, string> = {
+        Award: 'bg-yellow-100 text-yellow-800',
+        Publication: 'bg-blue-100 text-blue-800',
+        News: 'bg-green-100 text-green-800',
+        Announcement: 'bg-purple-100 text-purple-800',
+        Event: 'bg-pink-100 text-pink-800',
+    };
 
     return (
         <div className="min-h-screen bg-white">
@@ -106,22 +98,30 @@ export default function Home() {
                                     </Link>
                                 </div>
                                 <div className="space-y-4">
-                                    {latestNews.map((news, index) => (
-                                        <article key={index} className="news-item">
-                                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                                                <span className="inline-flex items-center text-sm text-gray-500">
-                                                    <Calendar className="h-4 w-4 mr-1" />
-                                                    {new Date(news.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                                </span>
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-100 text-secondary-800">
-                                                    {news.category}
-                                                </span>
-                                            </div>
-                                            <h3 className="text-lg font-semibold text-gray-900 hover:text-primary-600 transition-colors">
-                                                <Link href="#">{news.title}</Link>
-                                            </h3>
-                                        </article>
-                                    ))}
+                                    {latestNews.length > 0 ? (
+                                        latestNews.map((news) => (
+                                            <article key={news._id} className="news-item">
+                                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                                                    <span className="inline-flex items-center text-sm text-gray-500">
+                                                        <Calendar className="h-4 w-4 mr-1" />
+                                                        {new Date(news.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                    </span>
+                                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${categoryColors[news.category] || 'bg-gray-100 text-gray-800'}`}>
+                                                        {news.category}
+                                                    </span>
+                                                </div>
+                                                <h3 className="text-lg font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                                                    {news.link ? (
+                                                        <Link href={news.link}>{news.title}</Link>
+                                                    ) : (
+                                                        <span>{news.title}</span>
+                                                    )}
+                                                </h3>
+                                            </article>
+                                        ))
+                                    ) : (
+                                        <p className="text-gray-500">No recent news available.</p>
+                                    )}
                                 </div>
                             </div>
 
