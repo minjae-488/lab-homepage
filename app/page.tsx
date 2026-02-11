@@ -1,31 +1,14 @@
 import Link from 'next/link';
 import { ChevronRight, Calendar, User, FileText } from 'lucide-react';
 import { safeFetch } from '@/lib/sanity/client';
-import { latestNewsQuery } from '@/lib/sanity/queries';
-import { NewsItem } from '@/types/sanity';
+import { latestNewsQuery, featuredResearchQuery } from '@/lib/sanity/queries';
+import { NewsItem, ResearchProject } from '@/types/sanity';
 
 
 
 export default async function Home() {
     const latestNews: NewsItem[] = await safeFetch(latestNewsQuery);
-
-    const featuredResearch = [
-        {
-            title: 'AI-driven Healthcare Diagnostic System',
-            description: 'Developing diagnostic support systems using deep learning and medical imaging for improved clinical decision-making.',
-            type: 'Ongoing Project',
-        },
-        {
-            title: 'Cross-lingual Natural Language Processing',
-            description: 'Advancing NLP capabilities across multiple languages with focus on low-resource scenarios.',
-            type: 'Funded Research',
-        },
-        {
-            title: 'Knowledge Graph Construction and Reasoning',
-            description: 'Building large-scale knowledge graphs with advanced reasoning capabilities for complex queries.',
-            type: 'Collaborative Project',
-        },
-    ];
+    const featuredResearch: ResearchProject[] = await safeFetch(featuredResearchQuery);
 
     const categoryColors: Record<string, string> = {
         Award: 'bg-yellow-100 text-yellow-800',
@@ -134,20 +117,24 @@ export default async function Home() {
                                     </Link>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {featuredResearch.map((project, index) => (
-                                        <div key={index} className="academic-card">
-                                            <div className="mb-3">
-                                                <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-accent-100 text-accent-800">
-                                                    {project.type}
-                                                </span>
+                                    {featuredResearch.length > 0 ? (
+                                        featuredResearch.map((project) => (
+                                            <div key={project._id} className="academic-card">
+                                                <div className="mb-3">
+                                                    <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-accent-100 text-accent-800">
+                                                        {project.status === 'ongoing' ? 'Ongoing Project' : 'Completed Project'}
+                                                    </span>
+                                                </div>
+                                                <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
+                                                <p className="text-sm text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+                                                <Link href="/research" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
+                                                    Learn more
+                                                </Link>
                                             </div>
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h3>
-                                            <p className="text-sm text-gray-600 mb-4">{project.description}</p>
-                                            <Link href="/research" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
-                                                Learn more
-                                            </Link>
-                                        </div>
-                                    ))}
+                                        ))
+                                    ) : (
+                                        <p className="text-gray-500 col-span-2">No featured research available.</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

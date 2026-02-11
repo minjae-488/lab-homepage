@@ -54,3 +54,34 @@ export const latestNewsQuery = groq`
     link
   }
 `;
+
+export const researchProjectsQuery = groq`
+  *[_type == "research"] | order(startDate desc) {
+    _id,
+    title,
+    description,
+    "imageUrl": mainImage.asset->url,
+    status,
+    startDate,
+    endDate,
+    fundingAgency,
+    keywords,
+    relatedPublications[]->{
+      _id,
+      title,
+      year,
+      venue,
+      link
+    }
+  }
+`;
+
+export const featuredResearchQuery = groq`
+  *[_type == "research" && status == "ongoing"] | order(startDate desc)[0...3] {
+    _id,
+    title,
+    description,
+    "imageUrl": mainImage.asset->url,
+    status
+  }
+`;

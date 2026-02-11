@@ -36,3 +36,16 @@ export interface NewsItem {
     link?: string;
     content?: string;
 }
+
+export interface ResearchProject {
+    _id: string;
+    title: string;
+    description: string;
+    imageUrl?: string;
+    status: 'ongoing' | 'completed';
+    startDate: string;
+    endDate?: string;
+    fundingAgency?: string;
+    keywords?: string[];
+    relatedPublications?: Publication[];
+}
