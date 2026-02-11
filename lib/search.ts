@@ -1,8 +1,8 @@
 import publicationsData from '@/data/publications.json';
 import membersData from '@/data/members.json';
-import researchData from '@/data/research.json';
+import researchData from '@/data/research_migrated.json';
 import newsData from '@/data/news.json';
-import eventsData from '@/data/events.json';
+import eventsData from '@/data/events_migrated.json';
 import type { SearchResult, SearchResults } from '@/types';
 
 // Simple search function that checks if query matches text
