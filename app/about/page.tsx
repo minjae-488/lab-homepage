@@ -1,8 +1,27 @@
 import Link from 'next/link';
 import { ArrowLeft, Mail, Briefcase, GraduationCap, Award } from 'lucide-react';
-import professorData from '@/data/professor.json';
+import { safeFetch } from '@/lib/sanity/client';
+import { professorQuery } from '@/lib/sanity/queries';
+import { Professor } from '@/types/sanity';
 
-export default function AboutPage() {
+export const dynamic = 'force-static';
+
+export default async function AboutPage() {
+    const professor: Professor | null = await safeFetch(professorQuery);
+
+    if (!professor) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center">
+                    <p className="text-xl text-gray-600">Professor profile not found.</p>
+                    <Link href="/" className="text-primary-600 hover:text-primary-700 mt-4 inline-block">
+                        Back to Home
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-white">
             {/* Header */}
@@ -22,95 +41,101 @@ export default function AboutPage() {
                     {/* Professor Profile */}
                     <div className="academic-card mb-12">
                         <div className="flex flex-col md:flex-row gap-8">
-                            {professorData.imageUrl && (
+                            {professor.imageUrl && (
                                 <div className="w-48 h-48 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
                                     <img
-                                        src={professorData.imageUrl}
-                                        alt={professorData.name}
+                                        src={professor.imageUrl}
+                                        alt={professor.name}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
                             )}
                             <div className="flex-1">
-                                <h2 className="text-3xl font-bold text-gray-900 mb-2">{professorData.name}</h2>
-                                <p className="text-xl text-gray-600 mb-4">{professorData.title}</p>
-                                <p className="text-gray-700 mb-6 leading-relaxed whitespace-pre-line">{professorData.greeting}</p>
+                                <h2 className="text-3xl font-bold text-gray-900 mb-2">{professor.name}</h2>
+                                <p className="text-xl text-gray-600 mb-4">{professor.title}</p>
+                                <p className="text-gray-700 mb-6 leading-relaxed whitespace-pre-line">{professor.greeting}</p>
                                 <div className="flex flex-wrap gap-4">
-                                    <a
-                                        href={`mailto:${professorData.email}`}
-                                        className="inline-flex items-center text-primary-600 hover:text-primary-700"
-                                    >
-                                        <Mail className="h-4 w-4 mr-2" />
-                                        {professorData.email}
-                                    </a>
+                                    {professor.email && (
+                                        <a
+                                            href={`mailto:${professor.email}`}
+                                            className="inline-flex items-center text-primary-600 hover:text-primary-700"
+                                        >
+                                            <Mail className="h-4 w-4 mr-2" />
+                                            {professor.email}
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Research Interests */}
-                    <section className="mb-12">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <GraduationCap className="h-6 w-6 text-primary-600" />
-                            Research Interests
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                            {professorData.researchInterests.map((interest, idx) => (
-                                <span
-                                    key={idx}
-                                    className="px-4 py-2 bg-primary-50 text-primary-700 rounded-lg font-medium"
-                                >
-                                    {interest}
-                                </span>
-                            ))}
-                        </div>
-                    </section>
+                    {professor.researchInterests && professor.researchInterests.length > 0 && (
+                        <section className="mb-12">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <GraduationCap className="h-6 w-6 text-primary-600" />
+                                Research Interests
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {professor.researchInterests.map((interest, idx) => (
+                                    <span
+                                        key={idx}
+                                        className="px-4 py-2 bg-primary-50 text-primary-700 rounded-lg font-medium"
+                                    >
+                                        {interest}
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
                     {/* Education */}
-                    <section className="mb-12">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                            <GraduationCap className="h-6 w-6 text-primary-600" />
-                            Education
-                        </h3>
-                        <div className="space-y-4">
-                            {professorData.education.map((edu, idx) => (
-                                <div key={idx} className="border-l-4 border-primary-600 pl-4 py-2">
-                                    <div className="font-semibold text-gray-900">{edu.degree}</div>
-                                    <div className="text-gray-700">{edu.university}</div>
-                                    <div className="text-sm text-gray-600">{edu.year}</div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
+                    {professor.education && professor.education.length > 0 && (
+                        <section className="mb-12">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <GraduationCap className="h-6 w-6 text-primary-600" />
+                                Education
+                            </h3>
+                            <div className="space-y-4">
+                                {professor.education.map((edu, idx) => (
+                                    <div key={idx} className="border-l-4 border-primary-600 pl-4 py-2">
+                                        <div className="font-semibold text-gray-900">{edu.degree}</div>
+                                        <div className="text-gray-700">{edu.university}</div>
+                                        <div className="text-sm text-gray-600">{edu.year}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
                     {/* Career */}
-                    <section className="mb-12">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                            <Briefcase className="h-6 w-6 text-primary-600" />
-                            Academic Positions
-                        </h3>
-                        <div className="space-y-4">
-                            {professorData.career.map((position, idx) => (
-                                <div key={idx} className="border-l-4 border-secondary-600 pl-4 py-2">
-                                    <div className="font-semibold text-gray-900">{position.position}</div>
-                                    <div className="text-gray-700">{position.institution}</div>
-                                    <div className="text-sm text-gray-600">
-                                        {position.startYear}{position.endYear ? ` - ${position.endYear}` : ' - Present'}
+                    {professor.career && professor.career.length > 0 && (
+                        <section className="mb-12">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <Briefcase className="h-6 w-6 text-primary-600" />
+                                Academic Positions
+                            </h3>
+                            <div className="space-y-4">
+                                {professor.career.map((position, idx) => (
+                                    <div key={idx} className="border-l-4 border-secondary-600 pl-4 py-2">
+                                        <div className="font-semibold text-gray-900">{position.position}</div>
+                                        <div className="text-gray-700">{position.institution}</div>
+                                        <div className="text-sm text-gray-600">{position.period}</div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
                     {/* Awards */}
-                    {professorData.awards && professorData.awards.length > 0 && (
+                    {professor.awards && professor.awards.length > 0 && (
                         <section>
                             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                                 <Award className="h-6 w-6 text-primary-600" />
                                 Honors & Awards
                             </h3>
                             <div className="space-y-3">
-                                {professorData.awards.map((award, idx) => (
+                                {professor.awards.map((award, idx) => (
                                     <div key={idx} className="bg-yellow-50 border-l-4 border-yellow-400 pl-4 py-3 rounded-r">
                                         <div className="font-semibold text-gray-900">{award.title}</div>
                                         <div className="text-sm text-gray-700">{award.organization}</div>

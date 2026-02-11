@@ -20,3 +20,16 @@ export const safeFetch = async <T>(query: string, params: Record<string, any> = 
         return [];
     }
 }
+
+export const safeFetchSingleton = async <T>(query: string, params: Record<string, any> = {}): Promise<T | null> => {
+    try {
+        if (!projectId || projectId === 'dummy-project') {
+            console.warn('Sanity Project ID is missing or dummy. Returning null.');
+            return null;
+        }
+        return await client.fetch(query, params);
+    } catch (error) {
+        console.error('Error fetching data from Sanity:', error);
+        return null;
+    }
+}

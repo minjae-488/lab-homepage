@@ -85,3 +85,51 @@ export const featuredResearchQuery = groq`
     status
   }
 `;
+
+export const eventsQuery = groq`
+  *[_type == "event"] | order(startDate asc) {
+    _id,
+    title,
+    type,
+    startDate,
+    endDate,
+    location,
+    speaker,
+    description,
+    registrationLink,
+    tags
+  }
+`;
+
+export const professorQuery = groq`
+  *[_type == "professor"][0] {
+    _id,
+    name,
+    title,
+    "imageUrl": image.asset->url,
+    greeting,
+    email,
+    researchInterests,
+    education,
+    career,
+    awards
+  }
+`;
+
+export const siteSettingsQuery = groq`
+  *[_type == "siteSettings"][0] {
+    title,
+    institution,
+    description,
+    "logoUrl": logo.asset->url,
+    email,
+    phone,
+    address,
+    officeHours,
+    socialLinks,
+    footerText,
+    contactMessage,
+    googleMapsUrl,
+    directions
+  }
+`;

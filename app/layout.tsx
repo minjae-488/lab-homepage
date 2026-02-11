@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
+import { safeFetchSingleton } from "@/lib/sanity/client";
+import { siteSettingsQuery } from "@/lib/sanity/queries";
+import { SiteSettings } from "@/types/sanity";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,21 +20,22 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const settings = await safeFetchSingleton<SiteSettings>(siteSettingsQuery);
+
     return (
         <html lang="ko">
             <body className={inter.className}>
                 <div className="flex flex-col min-h-screen">
-                    <Header />
+                    <Header settings={settings} />
                     <main className="flex-grow">{children}</main>
-                    <Footer />
+                    <Footer settings={settings} />
                 </div>
             </body>
         </html>
     );
 }
-

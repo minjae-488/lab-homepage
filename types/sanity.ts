@@ -49,3 +49,65 @@ export interface ResearchProject {
     keywords?: string[];
     relatedPublications?: Publication[];
 }
+
+export interface Event {
+    _id: string;
+    title: string;
+    type: 'Seminar' | 'Workshop' | 'Defense' | 'Symposium' | 'Social' | 'Conference';
+    startDate: string;
+    endDate?: string;
+    location?: string;
+    speaker?: string;
+    description?: string;
+    registrationLink?: string;
+    tags?: string[];
+}
+
+export interface Professor {
+    _id: string;
+    name: string;
+    title: string;
+    imageUrl?: string;
+    greeting?: string;
+    email?: string;
+    researchInterests?: string[];
+    education?: {
+        degree: string;
+        university: string;
+        year: string;
+    }[];
+    career?: {
+        position: string;
+        institution: string;
+        period: string;
+    }[];
+    awards?: {
+        title: string;
+        organization: string;
+        year: string;
+    }[];
+}
+
+export interface SiteSettings {
+    title: string;
+    institution?: string;
+    description?: string;
+    logoUrl?: string; // Using image asset URL
+    email?: string;
+    phone?: string;
+    address?: string;
+    officeHours?: {
+        days: string;
+        hours: string;
+    }[];
+    socialLinks?: {
+        github?: string;
+        twitter?: string;
+        linkedin?: string;
+        youtube?: string;
+    };
+    footerText?: string;
+    contactMessage?: string;
+    googleMapsUrl?: string;
+    directions?: string;
+}

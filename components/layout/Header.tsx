@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X, Search } from 'lucide-react';
+import { SiteSettings } from '@/types/sanity';
 
 const navigation = [
     { name: 'Home', href: '/' },
@@ -16,9 +17,19 @@ const navigation = [
     { name: 'Contact', href: '/contact' },
 ];
 
-export default function Header() {
+interface HeaderProps {
+    settings?: SiteSettings | null;
+}
+
+export default function Header({ settings }: HeaderProps) {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const {
+        title = 'AI & NLP Lab',
+        institution = 'Korea University',
+        logoUrl
+    } = settings || {};
 
     const isActive = (href: string) => {
         if (href === '/') {
@@ -33,14 +44,18 @@ export default function Header() {
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-3 group">
-                        <div className="w-10 h-10 bg-primary-600 rounded flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">AI</span>
-                        </div>
+                        {logoUrl ? (
+                            <img src={logoUrl} alt="Logo" className="h-10 w-auto" />
+                        ) : (
+                            <div className="w-10 h-10 bg-primary-600 rounded flex items-center justify-center">
+                                <span className="text-white font-bold text-lg">AI</span>
+                            </div>
+                        )}
                         <div className="hidden sm:block">
                             <div className="text-sm font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
-                                AI & NLP Lab
+                                {title}
                             </div>
-                            <div className="text-xs text-gray-500">Korea University</div>
+                            <div className="text-xs text-gray-500">{institution}</div>
                         </div>
                     </Link>
 
