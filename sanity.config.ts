@@ -28,6 +28,7 @@ export default defineConfig({
             structure: (S) =>
                 S.list()
                     .title('콘텐츠 관리')
+                    .id('root')
                     .items([
                         S.listItem()
                             .title('⚙️ Site Settings (사이트 설정)')
