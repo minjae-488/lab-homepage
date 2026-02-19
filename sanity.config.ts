@@ -31,7 +31,7 @@ export default defineConfig({
                     .id('root')
                     .items([
                         S.listItem()
-                            .title('⚙️ Site Settings (사이트 설정)')
+                            .title('Site Settings (사이트 설정)')
                             .child(
                                 S.editor()
                                     .id('siteSettingsEditor')
@@ -40,14 +40,14 @@ export default defineConfig({
                                     .title('Site Settings')
                             ),
                         S.divider(),
-                        S.documentTypeListItem('professor').title('👨‍🏫 Professor (PI)'),
-                        S.documentTypeListItem('member').title('👥 Members (구성원)'),
+                        S.documentTypeListItem('professor').title('Professor (PI)'),
+                        S.documentTypeListItem('member').title('Members (구성원)'),
                         S.divider(),
-                        S.documentTypeListItem('research').title('🔬 Research (연구)'),
-                        S.documentTypeListItem('publication').title('📄 Publications (논문)'),
+                        S.documentTypeListItem('research').title('Research (연구)'),
+                        S.documentTypeListItem('publication').title('Publications (논문)'),
                         S.divider(),
-                        S.documentTypeListItem('news').title('📰 News (소식)'),
-                        S.documentTypeListItem('event').title('🗓️ Events (행사)'),
+                        S.documentTypeListItem('news').title('News (소식)'),
+                        S.documentTypeListItem('event').title('Events (행사)'),
                     ]),
         }),
 
@@ -55,7 +55,7 @@ export default defineConfig({
         presentationTool({
             previewUrl: previewUrl,
             name: 'preview',
-            title: '🖥️ 미리보기',
+            title: '미리보기',
         }),
 
         visionTool()

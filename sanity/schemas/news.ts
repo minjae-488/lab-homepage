@@ -17,11 +17,11 @@ export default {
             description: '소식 종류 선택 — 색깔 태그로 페이지에 표시됩니다',
             options: {
                 list: [
-                    { title: '🏆 Award (수상)', value: 'Award' },
-                    { title: '📄 Publication (논문 발표)', value: 'Publication' },
-                    { title: '📰 News (일반 소식)', value: 'News' },
-                    { title: '📢 Announcement (공지)', value: 'Announcement' },
-                    { title: '🎉 Event (행사)', value: 'Event' },
+                    { title: 'Award (수상)', value: 'Award' },
+                    { title: 'Publication (논문 발표)', value: 'Publication' },
+                    { title: 'News (일반 소식)', value: 'News' },
+                    { title: 'Announcement (공지)', value: 'Announcement' },
+                    { title: 'Event (행사)', value: 'Event' },
                 ],
             },
             initialValue: 'News',

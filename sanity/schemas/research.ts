@@ -94,7 +94,7 @@ export default {
             const { title, subtitle, media } = selection;
             return {
                 title: title,
-                subtitle: subtitle === 'ongoing' ? '🔬 진행 중' : '✅ 완료',
+                subtitle: subtitle === 'ongoing' ? '진행 중' : '완료',
                 media: media,
             };
         },

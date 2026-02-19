@@ -3,9 +3,9 @@ export default {
     title: 'Site Settings',
     type: 'document',
     groups: [
-        { name: 'general', title: '🏠 기본 정보' },
-        { name: 'contact', title: '📍 연락처 & 지도' },
-        { name: 'homepage', title: '🖥️ 홈 화면 내용' },
+        { name: 'general', title: '기본 정보' },
+        { name: 'contact', title: '연락처 & 지도' },
+        { name: 'homepage', title: '홈 화면 내용' },
     ],
     fields: [
         {
