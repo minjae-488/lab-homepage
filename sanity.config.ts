@@ -12,6 +12,12 @@ export default defineConfig({
     projectId,
     dataset,
 
+    // 인증 설정: Sanity 계정으로 로그인한 프로젝트 멤버만 접근 가능
+    auth: {
+        mode: 'replace',   // 로그인 화면이 Studio 전체를 대체
+        redirectOnSingle: true, // 로그인 방식이 하나면 자동 리다이렉트
+    },
+
     plugins: [
         structureTool({
             structure: (S) =>
