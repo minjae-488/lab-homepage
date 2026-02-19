@@ -1,8 +1,13 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { presentationTool } from '@sanity/presentation'
 import { schemaTypes } from './sanity/schemas'
 import { projectId, dataset } from './lib/sanity/env'
+
+const previewUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : 'http://localhost:3000'
 
 export default defineConfig({
     basePath: '/studio',
@@ -14,18 +19,18 @@ export default defineConfig({
 
     // 인증 설정: Sanity 계정으로 로그인한 프로젝트 멤버만 접근 가능
     auth: {
-        mode: 'replace',   // 로그인 화면이 Studio 전체를 대체
-        redirectOnSingle: true, // 로그인 방식이 하나면 자동 리다이렉트
+        mode: 'replace',
+        redirectOnSingle: true,
     },
 
     plugins: [
         structureTool({
             structure: (S) =>
                 S.list()
-                    .title('Content')
+                    .title('콘텐츠 관리')
                     .items([
                         S.listItem()
-                            .title('Site Settings')
+                            .title('⚙️ Site Settings (사이트 설정)')
                             .child(
                                 S.editor()
                                     .id('siteSettingsEditor')
@@ -34,14 +39,24 @@ export default defineConfig({
                                     .title('Site Settings')
                             ),
                         S.divider(),
-                        S.documentTypeListItem('member').title('Member'),
-                        S.documentTypeListItem('publication').title('Publication'),
-                        S.documentTypeListItem('news').title('News'),
-                        S.documentTypeListItem('research').title('Research'),
-                        S.documentTypeListItem('event').title('Event'),
-                        S.documentTypeListItem('professor').title('Professor (PI)'),
+                        S.documentTypeListItem('professor').title('👨‍🏫 Professor (PI)'),
+                        S.documentTypeListItem('member').title('👥 Members (구성원)'),
+                        S.divider(),
+                        S.documentTypeListItem('research').title('🔬 Research (연구)'),
+                        S.documentTypeListItem('publication').title('📄 Publications (논문)'),
+                        S.divider(),
+                        S.documentTypeListItem('news').title('📰 News (소식)'),
+                        S.documentTypeListItem('event').title('🗓️ Events (행사)'),
                     ]),
         }),
+
+        // 라이브 미리보기: Studio 편집 중 실시간으로 웹사이트 확인
+        presentationTool({
+            previewUrl: previewUrl,
+            name: 'preview',
+            title: '🖥️ 미리보기',
+        }),
+
         visionTool()
     ],
 
