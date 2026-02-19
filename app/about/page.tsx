@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { ArrowLeft, Mail, Briefcase, GraduationCap, Award } from 'lucide-react';
-import { safeFetch } from '@/lib/sanity/client';
+import { safeFetch, safeFetchSingleton } from '@/lib/sanity/client';
 import { professorQuery } from '@/lib/sanity/queries';
 import { Professor } from '@/types/sanity';
 
-export const dynamic = 'force-static';
+export const revalidate = 60;
 
 export default async function AboutPage() {
-    const professor: Professor | null = await safeFetch(professorQuery);
+    const professor: Professor | null = await safeFetchSingleton(professorQuery);
 
     if (!professor) {
         return (

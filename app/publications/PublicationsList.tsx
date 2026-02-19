@@ -129,8 +129,8 @@ export default function PublicationsList({ publications }: { publications: Publi
                                 <div className="flex items-start justify-between gap-4 mb-3">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeColors[pub.type as PublicationType]}`}>
-                                                {typeLabels[pub.type as PublicationType]}
+                                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeColors[pub.type as PublicationType] || 'bg-gray-100 text-gray-800'}`}>
+                                                {typeLabels[pub.type as PublicationType] || pub.type || 'Other'}
                                             </span>
                                         </div>
                                         <h2 className="text-xl font-semibold text-gray-900 mb-2">

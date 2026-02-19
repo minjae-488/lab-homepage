@@ -1,18 +1,19 @@
-import publicationsData from '@/data/publications.json';
-import membersData from '@/data/members.json';
-import researchData from '@/data/research_migrated.json';
-import newsData from '@/data/news.json';
-import eventsData from '@/data/events_migrated.json';
-import type { SearchResult, SearchResults } from '@/types';
+import { safeFetch } from './sanity/client';
+import { globalSearchQuery } from './sanity/queries';
+import type { SearchResults } from '@/types';
 
-// Simple search function that checks if query matches text
-function matchesQuery(text: string | undefined, query: string): boolean {
-    if (!text) return false;
-    return text.toLowerCase().includes(query.toLowerCase());
+interface SanityDoc {
+    _id: string;
+    _type: string;
+    title: string;
+    description: string;
+    link: string;
+    category?: string;
+    date?: string;
 }
 
-// Search across all data sources
-export function searchAll(query: string): SearchResults {
+// Search across all data sources from Sanity
+export async function searchAll(query: string): Promise<SearchResults> {
     if (!query.trim()) {
         return {
             query,
@@ -25,107 +26,66 @@ export function searchAll(query: string): SearchResults {
         };
     }
 
-    const normalizedQuery = query.toLowerCase();
+    const results = await safeFetch<SanityDoc>(globalSearchQuery, {
+        searchTerm: `${query}*`, // Add wildcard for partial matching
+    });
 
-    // Search Publications
-    const publications = publicationsData
-        .filter((pub: any) => {
-            return (
-                matchesQuery(pub.title, normalizedQuery) ||
-                matchesQuery(pub.abstract, normalizedQuery) ||
-                pub.authors?.some((author: string) => matchesQuery(author, normalizedQuery)) ||
-                pub.keywords?.some((keyword: string) => matchesQuery(keyword, normalizedQuery)) ||
-                matchesQuery(pub.conference, normalizedQuery) ||
-                matchesQuery(pub.journal, normalizedQuery)
-            );
-        })
-        .map((pub: any) => ({
-            id: pub.id,
+    const publications = results
+        .filter((item: SanityDoc) => item._type === 'publication')
+        .map((item: SanityDoc) => ({
+            id: item._id,
             type: 'publication' as const,
-            title: pub.title,
-            description: `${pub.authors.join(', ')} - ${pub.conference || pub.journal || ''} ${pub.year}`,
-            link: `/publications#${pub.id}`,
-            metadata: { year: pub.year, type: pub.type },
-        }));
-
-    // Search Members
-    const members = membersData
-        .filter((member: any) => {
-            return (
-                matchesQuery(member.name, normalizedQuery) ||
-                matchesQuery(member.bio, normalizedQuery) ||
-                matchesQuery(member.degree, normalizedQuery) ||
-                member.researchInterest?.some((interest: string) => matchesQuery(interest, normalizedQuery))
-            );
-        })
-        .map((member: any) => ({
-            id: member.id,
-            type: 'member' as const,
-            title: member.name,
-            description: member.degree || member.role || '',
-            link: `/members#${member.id}`,
-            metadata: { role: member.role },
-        }));
-
-    // Search Research
-    const research = researchData
-        .filter((project: any) => {
-            return (
-                matchesQuery(project.title, normalizedQuery) ||
-                matchesQuery(project.description, normalizedQuery) ||
-                project.keywords?.some((keyword: string) => matchesQuery(keyword, normalizedQuery)) ||
-                project.members?.some((member: string) => matchesQuery(member, normalizedQuery))
-            );
-        })
-        .map((project: any) => ({
-            id: project.id,
-            type: 'research' as const,
-            title: project.title,
-            description: project.description.substring(0, 150) + '...',
-            link: `/research#${project.id}`,
-            metadata: { status: project.status },
-        }));
-
-    // Search News
-    const news = newsData
-        .filter((item: any) => {
-            return (
-                matchesQuery(item.title, normalizedQuery) ||
-                matchesQuery(item.summary, normalizedQuery) ||
-                matchesQuery(item.content, normalizedQuery) ||
-                item.tags?.some((tag: string) => matchesQuery(tag, normalizedQuery))
-            );
-        })
-        .map((item: any) => ({
-            id: item.id,
-            type: 'news' as const,
             title: item.title,
-            description: item.summary,
-            link: `/news#${item.id}`,
+            description: item.description,
+            link: item.link,
             metadata: { category: item.category, date: item.date },
         }));
 
-    // Search Events
-    const events = eventsData
-        .filter((event: any) => {
-            return (
-                matchesQuery(event.title, normalizedQuery) ||
-                matchesQuery(event.description, normalizedQuery) ||
-                matchesQuery(event.speaker, normalizedQuery) ||
-                matchesQuery(event.location, normalizedQuery) ||
-                event.tags?.some((tag: string) => matchesQuery(tag, normalizedQuery))
-            );
-        })
-        .map((event: any) => ({
-            id: event.id,
-            type: 'event' as const,
-            title: event.title,
-            description: event.description.substring(0, 150) + '...',
-            link: `/events#${event.id}`,
-            metadata: { type: event.type, date: event.date, status: event.status },
+    const members = results
+        .filter((item: SanityDoc) => item._type === 'member')
+        .map((item: SanityDoc) => ({
+            id: item._id,
+            type: 'member' as const,
+            title: item.title,
+            description: item.description,
+            link: item.link,
+            metadata: { category: item.category },
         }));
 
-    const total = publications.length + members.length + research.length + news.length + events.length;
+    const research = results
+        .filter((item: SanityDoc) => item._type === 'research')
+        .map((item: SanityDoc) => ({
+            id: item._id,
+            type: 'research' as const,
+            title: item.title,
+            description: item.description,
+            link: item.link,
+            metadata: { category: item.category },
+        }));
+
+    const news = results
+        .filter((item: SanityDoc) => item._type === 'news')
+        .map((item: SanityDoc) => ({
+            id: item._id,
+            type: 'news' as const,
+            title: item.title,
+            description: item.description,
+            link: item.link,
+            metadata: { category: item.category, date: item.date },
+        }));
+
+    const events = results
+        .filter((item: SanityDoc) => item._type === 'event')
+        .map((item: SanityDoc) => ({
+            id: item._id,
+            type: 'event' as const,
+            title: item.title,
+            description: item.description,
+            link: item.link,
+            metadata: { category: item.category, date: item.date },
+        }));
+
+    const total = results.length;
 
     return {
         query,

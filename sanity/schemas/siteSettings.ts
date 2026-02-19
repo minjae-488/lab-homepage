@@ -2,11 +2,17 @@ export default {
     name: 'siteSettings',
     title: 'Site Settings',
     type: 'document',
+    groups: [
+        { name: 'general', title: 'General' },
+        { name: 'contact', title: 'Contact & Map' },
+        { name: 'homepage', title: 'Homepage Content' },
+    ],
     fields: [
         {
             name: 'title',
             title: 'Site Title',
             type: 'string',
+            group: 'general',
             description: 'The title of your site (e.g. AI & NLP Lab)',
             validation: (Rule: any) => Rule.required(),
         },
@@ -14,18 +20,21 @@ export default {
             name: 'institution',
             title: 'Institution Name',
             type: 'string',
+            group: 'general',
             description: 'Your university or organization name',
         },
         {
             name: 'description',
             title: 'Site Description',
             type: 'text',
+            group: 'general',
             description: 'A short description of your lab (used for SEO and footer)',
         },
         {
             name: 'logo',
             title: 'Logo',
             type: 'image',
+            group: 'general',
             options: {
                 hotspot: true,
             },
@@ -34,22 +43,26 @@ export default {
             name: 'email',
             title: 'Contact Email',
             type: 'string',
+            group: 'contact',
         },
         {
             name: 'phone',
             title: 'Phone Number',
             type: 'string',
+            group: 'contact',
         },
         {
             name: 'address',
             title: 'Address',
             type: 'text',
+            group: 'contact',
             rows: 3,
         },
         {
             name: 'officeHours',
             title: 'Office / Lab Hours',
             type: 'array',
+            group: 'contact',
             of: [
                 {
                     type: 'object',
@@ -64,6 +77,7 @@ export default {
             name: 'socialLinks',
             title: 'Social Media Links',
             type: 'object',
+            group: 'contact',
             fields: [
                 { name: 'github', type: 'url', title: 'GitHub URL' },
                 { name: 'twitter', type: 'url', title: 'Twitter/X URL' },
@@ -75,12 +89,14 @@ export default {
             name: 'footerText',
             title: 'Custom Footer Text',
             type: 'string',
+            group: 'general',
             description: 'Override the default copyright text if needed',
         },
         {
             name: 'contactMessage',
             title: 'Contact Page Message',
             type: 'text',
+            group: 'contact',
             rows: 3,
             description: 'Message displayed below the Contact title (e.g., "Get in touch with our research group")',
         },
@@ -88,14 +104,58 @@ export default {
             name: 'googleMapsUrl',
             title: 'Google Maps Embed URL',
             type: 'url',
+            group: 'contact',
             description: 'The "Embed a map" URL from Google Maps (src attribute in iframe code)',
         },
         {
             name: 'directions',
             title: 'Directions',
             type: 'text',
+            group: 'contact',
             rows: 4,
             description: 'Instructions on how to get to the lab (e.g., subway, bus info)',
+        },
+        {
+            name: 'heroTitle',
+            title: 'Hero Section Title',
+            type: 'string',
+            group: 'homepage',
+        },
+        {
+            name: 'heroSubtitle',
+            title: 'Hero Section Subtitle',
+            type: 'text',
+            rows: 2,
+            group: 'homepage',
+        },
+        {
+            name: 'stats',
+            title: 'Laboratory Statistics',
+            type: 'array',
+            group: 'homepage',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'label', type: 'string', title: 'Label' },
+                        { name: 'value', type: 'string', title: 'Value' },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'aboutExcerpt',
+            title: 'Lab About Excerpt (Sidebar)',
+            type: 'text',
+            rows: 3,
+            group: 'homepage',
+        },
+        {
+            name: 'joinUsText',
+            title: 'Join Us / CTA Section Text',
+            type: 'text',
+            rows: 2,
+            group: 'homepage',
         },
     ],
 }

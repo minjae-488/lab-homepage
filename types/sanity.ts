@@ -110,4 +110,12 @@ export interface SiteSettings {
     contactMessage?: string;
     googleMapsUrl?: string;
     directions?: string;
+    heroTitle?: string;
+    heroSubtitle?: string;
+    stats?: {
+        label: string;
+        value: string;
+    }[];
+    aboutExcerpt?: string;
+    joinUsText?: string;
 }

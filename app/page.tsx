@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import { ChevronRight, Calendar, User, FileText } from 'lucide-react';
-import { safeFetch } from '@/lib/sanity/client';
-import { latestNewsQuery, featuredResearchQuery } from '@/lib/sanity/queries';
-import { NewsItem, ResearchProject } from '@/types/sanity';
+import { safeFetch, safeFetchSingleton } from '@/lib/sanity/client';
+import { latestNewsQuery, featuredResearchQuery, siteSettingsQuery, latestPublicationQuery } from '@/lib/sanity/queries';
+import { NewsItem, ResearchProject, SiteSettings, Publication } from '@/types/sanity';
 
-
+export const revalidate = 60;
 
 export default async function Home() {
     const latestNews: NewsItem[] = await safeFetch(latestNewsQuery);
     const featuredResearch: ResearchProject[] = await safeFetch(featuredResearchQuery);
+    const settings = await safeFetchSingleton<SiteSettings>(siteSettingsQuery);
+    const latestPublication = await safeFetchSingleton<Publication>(latestPublicationQuery);
 
     const categoryColors: Record<string, string> = {
         Award: 'bg-yellow-100 text-yellow-800',
@@ -18,6 +20,15 @@ export default async function Home() {
         Event: 'bg-pink-100 text-pink-800',
     };
 
+    const defaultStats = [
+        { label: 'Publications', value: '14+' },
+        { label: 'Researchers', value: '10' },
+        { label: 'Active Projects', value: '5+' },
+        { label: 'Citations', value: '200+' },
+    ];
+
+    const stats = settings?.stats || defaultStats;
+
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section - Clean and Academic */}
@@ -25,10 +36,10 @@ export default async function Home() {
                 <div className="section-container py-16 md:py-24">
                     <div className="max-w-4xl">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                            AI & NLP Research Laboratory
+                            {settings?.heroTitle || 'AI & NLP Research Laboratory'}
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                            Advancing artificial intelligence and natural language processing through innovative research and collaboration
+                            {settings?.heroSubtitle || 'Advancing artificial intelligence and natural language processing through innovative research and collaboration'}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link href="/research" className="btn-primary">
@@ -46,22 +57,12 @@ export default async function Home() {
             <section className="bg-primary-600 text-white py-8">
                 <div className="section-container">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <div>
-                            <div className="text-3xl md:text-4xl font-bold mb-1">14+</div>
-                            <div className="text-sm md:text-base text-primary-100">Publications</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl md:text-4xl font-bold mb-1">10</div>
-                            <div className="text-sm md:text-base text-primary-100">Researchers</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl md:text-4xl font-bold mb-1">5+</div>
-                            <div className="text-sm md:text-base text-primary-100">Active Projects</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl md:text-4xl font-bold mb-1">200+</div>
-                            <div className="text-sm md:text-base text-primary-100">Citations</div>
-                        </div>
+                        {stats.map((stat, idx) => (
+                            <div key={idx}>
+                                <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
+                                <div className="text-sm md:text-base text-primary-100">{stat.label}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -145,7 +146,7 @@ export default async function Home() {
                             <div className="academic-card">
                                 <h3 className="text-xl font-bold text-gray-900 mb-4">About the Lab</h3>
                                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                                    We are a leading research group in artificial intelligence and natural language processing at Korea University, dedicated to advancing the state-of-the-art through innovative research and collaboration.
+                                    {settings?.aboutExcerpt || settings?.description || 'We are a leading research group in artificial intelligence and natural language processing at Korea University, dedicated to advancing the state-of-the-art through innovative research and collaboration.'}
                                 </p>
                                 <Link href="/about" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
                                     Learn more about us
@@ -178,20 +179,22 @@ export default async function Home() {
                             </div>
 
                             {/* Recent Publication */}
-                            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-3">Recent Publication</h3>
-                                <div className="mb-3">
-                                    <h4 className="text-sm font-semibold text-gray-900 mb-1">
-                                        Deep Learning Approaches for Natural Language Understanding in Healthcare
-                                    </h4>
-                                    <p className="text-xs text-gray-600">
-                                        ACL 2025 | Kim, Lee, Park
-                                    </p>
+                            {latestPublication && (
+                                <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                                    <h3 className="text-lg font-bold text-gray-900 mb-3">Recent Publication</h3>
+                                    <div className="mb-3">
+                                        <h4 className="text-sm font-semibold text-gray-900 mb-1">
+                                            {latestPublication.title}
+                                        </h4>
+                                        <p className="text-xs text-gray-600">
+                                            {latestPublication.venue && `${latestPublication.venue} | `}{latestPublication.authors}
+                                        </p>
+                                    </div>
+                                    <Link href="/publications" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
+                                        View publication
+                                    </Link>
                                 </div>
-                                <Link href="/publications" className="text-primary-600 hover:text-primary-700 text-sm font-medium link-arrow">
-                                    View publication
-                                </Link>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -202,7 +205,7 @@ export default async function Home() {
                 <div className="section-container text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Research Group</h2>
                     <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-                        We are looking for passionate graduate students and researchers interested in AI and NLP
+                        {settings?.joinUsText || 'We are looking for passionate graduate students and researchers interested in AI and NLP'}
                     </p>
                     <Link href="/contact" className="inline-flex items-center px-6 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-gray-900 transition-colors">
                         Contact Us

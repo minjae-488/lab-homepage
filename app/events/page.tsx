@@ -6,7 +6,7 @@ import { eventsQuery } from '@/lib/sanity/queries';
 import { Event } from '@/types/sanity';
 import EventsList from './EventsList';
 
-export const dynamic = 'force-static';
+export const revalidate = 60;
 
 export default async function EventsPage() {
     const events: Event[] = await safeFetch(eventsQuery);

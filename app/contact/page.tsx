@@ -4,7 +4,7 @@ import { safeFetchSingleton } from '@/lib/sanity/client';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
 import { SiteSettings } from '@/types/sanity';
 
-export const dynamic = 'force-static';
+export const revalidate = 60;
 
 export default async function ContactPage() {
     const settings = await safeFetchSingleton<SiteSettings>(siteSettingsQuery);

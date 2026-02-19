@@ -3,7 +3,7 @@ import { publicationsQuery } from '@/lib/sanity/queries';
 import { Publication } from '@/types/sanity';
 import PublicationsList from './PublicationsList';
 
-
+export const revalidate = 60;
 
 export default async function PublicationsPage() {
     const publications: Publication[] = await safeFetch(publicationsQuery);

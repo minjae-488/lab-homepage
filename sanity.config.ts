@@ -21,14 +21,19 @@ export default defineConfig({
                         S.listItem()
                             .title('Site Settings')
                             .child(
-                                S.document()
+                                S.editor()
+                                    .id('siteSettingsEditor')
                                     .schemaType('siteSettings')
                                     .documentId('siteSettings')
+                                    .title('Site Settings')
                             ),
                         S.divider(),
-                        ...S.documentTypeListItems().filter(
-                            (item) => item.getId() !== 'siteSettings'
-                        ),
+                        S.documentTypeListItem('member').title('Member'),
+                        S.documentTypeListItem('publication').title('Publication'),
+                        S.documentTypeListItem('news').title('News'),
+                        S.documentTypeListItem('research').title('Research'),
+                        S.documentTypeListItem('event').title('Event'),
+                        S.documentTypeListItem('professor').title('Professor (PI)'),
                     ]),
         }),
         visionTool()

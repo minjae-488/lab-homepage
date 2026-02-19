@@ -4,7 +4,7 @@ import { safeFetch } from '@/lib/sanity/client';
 import { membersQuery } from '@/lib/sanity/queries';
 import { Member } from '@/types/sanity';
 
-
+export const revalidate = 60;
 
 export default async function MembersPage() {
     const members: Member[] = await safeFetch(membersQuery);

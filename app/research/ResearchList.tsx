@@ -71,9 +71,11 @@ export default function ResearchList({ projects }: ResearchListProps) {
             {/* Projects List */}
             <div className="space-y-8">
                 {filteredProjects.map((project) => {
-                    const duration = project.endDate
-                        ? `${project.startDate} - ${project.endDate}`
-                        : `${project.startDate} - Present`;
+                    const duration = project.startDate
+                        ? project.endDate
+                            ? `${project.startDate} - ${project.endDate}`
+                            : `${project.startDate} - Present`
+                        : 'TBD';
 
                     return (
                         <article key={project._id} className="academic-card">

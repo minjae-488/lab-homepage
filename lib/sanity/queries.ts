@@ -130,6 +130,58 @@ export const siteSettingsQuery = groq`
     footerText,
     contactMessage,
     googleMapsUrl,
-    directions
+    directions,
+    heroTitle,
+    heroSubtitle,
+    stats,
+    aboutExcerpt,
+    joinUsText
   }
 `;
+
+export const latestPublicationQuery = groq`
+  *[_type == "publication"] | order(year desc)[0] {
+    _id,
+    title,
+    authors,
+    year,
+    venue,
+    link,
+    type
+  }
+`;
+
+export const globalSearchQuery = groq`
+  *[
+    (_type in ["member", "publication", "news", "research", "event"]) &&
+    (
+      name match $searchTerm ||
+      title match $searchTerm ||
+      description match $searchTerm ||
+      bio match $searchTerm ||
+      authors match $searchTerm ||
+      venue match $searchTerm ||
+      excerpt match $searchTerm ||
+      category match $searchTerm ||
+      tags match $searchTerm ||
+      keywords match $searchTerm ||
+      speaker match $searchTerm
+    )
+  ] {
+    _id,
+    _type,
+    "title": coalesce(title, name),
+    "description": coalesce(description, bio, excerpt, summary, ""),
+    "link": select(
+      _type == "member" => "/members#" + _id,
+      _type == "publication" => "/publications#" + _id,
+      _type == "news" => "/news#" + _id,
+      _type == "research" => "/research#" + _id,
+      _type == "event" => "/events#" + _id,
+      "/"
+    ),
+    "date": coalesce(publishedAt, startDate, year),
+    "category": coalesce(category, role, type, status)
+  }
+`;
+

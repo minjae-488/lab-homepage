@@ -6,6 +6,8 @@ import { researchProjectsQuery } from '@/lib/sanity/queries';
 import { ResearchProject } from '@/types/sanity';
 import ResearchList from './ResearchList';
 
+export const revalidate = 60;
+
 export default async function ResearchPage() {
     const projects: ResearchProject[] = await safeFetch(researchProjectsQuery);
 

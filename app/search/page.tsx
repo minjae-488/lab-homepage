@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search, FileText, Users, Lightbulb, Newspaper, Calendar, ArrowLeft } from 'lucide-react';
 import { searchAll } from '@/lib/search';
-import type { SearchResult } from '@/types';
+import type { SearchResult, SearchResults } from '@/types';
 
 const categoryIcons = {
     publication: FileText,
@@ -28,28 +28,53 @@ function SearchContent() {
     const queryParam = searchParams.get('q') || '';
 
     const [query, setQuery] = useState(queryParam);
+    const [results, setResults] = useState<SearchResults>({
+        query: '',
+        total: 0,
+        publications: [],
+        members: [],
+        research: [],
+        news: [],
+        events: [],
+    });
+    const [loading, setLoading] = useState(false);
     const [activeCategory, setActiveCategory] = useState<'all' | 'publication' | 'member' | 'research' | 'news' | 'event'>('all');
 
-    // Update query when URL changes
+    // Perform search when query changes
+    useEffect(() => {
+        const fetchResults = async () => {
+            if (!query.trim()) {
+                setResults({
+                    query: '',
+                    total: 0,
+                    publications: [],
+                    members: [],
+                    research: [],
+                    news: [],
+                    events: [],
+                });
+                return;
+            }
+
+            setLoading(true);
+            try {
+                const searchResults = await searchAll(query);
+                setResults(searchResults);
+            } catch (error) {
+                console.error('Search failed:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        const debounceTimer = setTimeout(fetchResults, 300);
+        return () => clearTimeout(debounceTimer);
+    }, [query]);
+
+    // Update internal query when URL changes
     useEffect(() => {
         setQuery(queryParam);
     }, [queryParam]);
-
-    // Perform search
-    const results = useMemo(() => {
-        if (!query.trim()) {
-            return {
-                query: '',
-                total: 0,
-                publications: [],
-                members: [],
-                research: [],
-                news: [],
-                events: [],
-            };
-        }
-        return searchAll(query);
-    }, [query]);
 
     // Filter results by category
     const displayResults = useMemo(() => {
@@ -66,12 +91,11 @@ function SearchContent() {
             activeCategory === 'member' ? 'members' :
                 activeCategory === 'research' ? 'research' :
                     activeCategory === 'news' ? 'news' : 'events';
-        return results[categoryKey];
+        return results[categoryKey] as SearchResult[];
     }, [results, activeCategory]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        // Update URL to trigger search
         window.history.pushState({}, '', `/search?q=${encodeURIComponent(query)}`);
     };
 
