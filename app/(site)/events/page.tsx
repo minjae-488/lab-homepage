@@ -5,13 +5,11 @@ import { safeFetch } from '@/lib/sanity/client';
 import { eventsQuery } from '@/lib/sanity/queries';
 import { Event } from '@/types/sanity';
 import EventsList from './EventsList';
-import { draftMode } from 'next/headers';
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export default async function EventsPage() {
-    const { isEnabled } = draftMode();
-    const events: Event[] = await safeFetch(eventsQuery, {}, isEnabled);
+    const events: Event[] = await safeFetch(eventsQuery);
 
     return (
         <div className="min-h-screen bg-white">

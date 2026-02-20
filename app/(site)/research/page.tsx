@@ -5,13 +5,11 @@ import { safeFetch } from '@/lib/sanity/client';
 import { researchProjectsQuery } from '@/lib/sanity/queries';
 import { ResearchProject } from '@/types/sanity';
 import ResearchList from './ResearchList';
-import { draftMode } from 'next/headers';
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export default async function ResearchPage() {
-    const { isEnabled } = draftMode();
-    const projects: ResearchProject[] = await safeFetch(researchProjectsQuery, {}, isEnabled);
+    const projects: ResearchProject[] = await safeFetch(researchProjectsQuery);
 
     return (
         <div className="min-h-screen bg-white">
