@@ -50,9 +50,13 @@ export default defineConfig({
                     ]),
         }),
 
-        // 라이브 미리보기: Studio 편집 중 웹사이트 확인 (게시된 콘텐츠 표시)
+        // 라이브 미리보기: Studio에서 초안 콘텐츠 실시간 확인
         presentationTool({
-            previewUrl: '/',
+            previewUrl: {
+                draftMode: {
+                    enable: '/api/draft',
+                },
+            },
             name: 'preview',
             title: '미리보기',
         }),

@@ -3,11 +3,13 @@ import { ArrowLeft, Mail, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { safeFetch, safeFetchSingleton } from '@/lib/sanity/client';
 import { professorQuery } from '@/lib/sanity/queries';
 import { Professor } from '@/types/sanity';
+import { draftMode } from 'next/headers';
 
 export const revalidate = 10;
 
 export default async function AboutPage() {
-    const professor: Professor | null = await safeFetchSingleton(professorQuery);
+    const { isEnabled } = draftMode();
+    const professor: Professor | null = await safeFetchSingleton(professorQuery, {}, isEnabled);
 
     if (!professor) {
         return (

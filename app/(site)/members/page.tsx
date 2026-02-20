@@ -3,11 +3,13 @@ import { ArrowLeft, Mail } from 'lucide-react';
 import { safeFetch } from '@/lib/sanity/client';
 import { membersQuery } from '@/lib/sanity/queries';
 import { Member } from '@/types/sanity';
+import { draftMode } from 'next/headers';
 
 export const revalidate = 10;
 
 export default async function MembersPage() {
-    const members: Member[] = await safeFetch(membersQuery);
+    const { isEnabled } = draftMode();
+    const members: Member[] = await safeFetch(membersQuery, {}, isEnabled);
 
     const groupedMembers = {
         PI: members.filter(m => m.role === 'Professor'),
