@@ -50,14 +50,9 @@ export default defineConfig({
                     ]),
         }),
 
-        // 라이브 미리보기: Studio 편집 중 실시간으로 웹사이트 확인
+        // 라이브 미리보기: Studio 편집 중 웹사이트 확인 (게시된 콘텐츠 표시)
         presentationTool({
-            previewUrl: {
-                draftMode: {
-                    enable: '/api/draft',
-                },
-                preview: previewUrl,
-            },
+            previewUrl: '/',
             name: 'preview',
             title: '미리보기',
         }),
