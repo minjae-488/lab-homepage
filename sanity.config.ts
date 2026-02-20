@@ -5,9 +5,8 @@ import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './sanity/schemas'
 import { projectId, dataset } from './lib/sanity/env'
 
-const previewUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : 'http://localhost:3000'
+// Studio가 iframe으로 로드할 미리보기 URL: 상대 경로 '/'는 항상 현재 도메인을 사용
+const previewUrl = '/'
 
 export default defineConfig({
     basePath: '/studio',
@@ -53,7 +52,12 @@ export default defineConfig({
 
         // 라이브 미리보기: Studio 편집 중 실시간으로 웹사이트 확인
         presentationTool({
-            previewUrl: previewUrl,
+            previewUrl: {
+                draftMode: {
+                    enable: '/api/draft',
+                },
+                preview: previewUrl,
+            },
             name: 'preview',
             title: '미리보기',
         }),
