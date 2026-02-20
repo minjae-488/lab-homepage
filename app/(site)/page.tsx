@@ -3,14 +3,16 @@ import { ChevronRight, Calendar, User, FileText } from 'lucide-react';
 import { safeFetch, safeFetchSingleton } from '@/lib/sanity/client';
 import { latestNewsQuery, featuredResearchQuery, siteSettingsQuery, latestPublicationQuery } from '@/lib/sanity/queries';
 import { NewsItem, ResearchProject, SiteSettings, Publication } from '@/types/sanity';
+import { draftMode } from 'next/headers';
 
 export const revalidate = 60;
 
 export default async function Home() {
-    const latestNews: NewsItem[] = await safeFetch(latestNewsQuery);
-    const featuredResearch: ResearchProject[] = await safeFetch(featuredResearchQuery);
-    const settings = await safeFetchSingleton<SiteSettings>(siteSettingsQuery);
-    const latestPublication = await safeFetchSingleton<Publication>(latestPublicationQuery);
+    const { isEnabled } = draftMode();
+    const latestNews: NewsItem[] = await safeFetch(latestNewsQuery, {}, isEnabled);
+    const featuredResearch: ResearchProject[] = await safeFetch(featuredResearchQuery, {}, isEnabled);
+    const settings = await safeFetchSingleton<SiteSettings>(siteSettingsQuery, {}, isEnabled);
+    const latestPublication = await safeFetchSingleton<Publication>(latestPublicationQuery, {}, isEnabled);
 
     const categoryColors: Record<string, string> = {
         Award: 'bg-yellow-100 text-yellow-800',
