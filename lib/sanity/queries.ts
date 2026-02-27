@@ -10,7 +10,17 @@ export const membersQuery = groq`
     bio,
     email,
     researchInterest,
-    links
+    links,
+    education,
+    awards,
+    workExperiences,
+    publications[]->{
+      _id,
+      title,
+      year,
+      venue,
+      link
+    }
   }
 `;
 

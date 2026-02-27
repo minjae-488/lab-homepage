@@ -81,6 +81,70 @@ export default {
             ],
         },
         {
+            name: 'education',
+            title: 'Education (학력)',
+            type: 'array',
+            description: '학력 사항 (최신순 입력 권장)',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'degree', type: 'string', title: '학위 (예: Ph.D., M.S., B.S.)' },
+                        { name: 'institution', type: 'string', title: '학교 이름' },
+                        { name: 'year', type: 'string', title: '연도 (예: 2020, 2018–2022)' },
+                    ],
+                    preview: {
+                        select: { title: 'degree', subtitle: 'institution' },
+                    },
+                },
+            ],
+        },
+        {
+            name: 'awards',
+            title: 'Awards (수상 이력)',
+            type: 'array',
+            description: '수상 및 장학금 등',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: '수상명' },
+                        { name: 'organization', type: 'string', title: '수여 기관' },
+                        { name: 'year', type: 'string', title: '연도' },
+                    ],
+                    preview: {
+                        select: { title: 'title', subtitle: 'year' },
+                    },
+                },
+            ],
+        },
+        {
+            name: 'workExperiences',
+            title: 'Work Experiences (경력)',
+            type: 'array',
+            description: '인턴십, 산업체 경험 등',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'position', type: 'string', title: '직책/역할' },
+                        { name: 'organization', type: 'string', title: '기관/회사명' },
+                        { name: 'period', type: 'string', title: '기간 (예: 2023.06–2023.08)' },
+                    ],
+                    preview: {
+                        select: { title: 'position', subtitle: 'organization' },
+                    },
+                },
+            ],
+        },
+        {
+            name: 'publications',
+            title: 'Publications (논문)',
+            type: 'array',
+            description: '이 멤버가 참여한 논문 (Publication 목록에서 선택)',
+            of: [{ type: 'reference', to: { type: 'publication' } }],
+        },
+        {
             name: 'order',
             title: 'Display Order (정렬 순서)',
             type: 'number',

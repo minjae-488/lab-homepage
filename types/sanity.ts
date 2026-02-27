@@ -8,6 +8,10 @@ export interface Member {
     email?: string;
     researchInterest?: string[];
     links?: { title: string; url: string }[];
+    education?: { degree: string; institution: string; year: string }[];
+    awards?: { title: string; organization: string; year: string }[];
+    workExperiences?: { position: string; organization: string; period: string }[];
+    publications?: { _id: string; title: string; year: number; venue?: string; link?: string }[];
 }
 
 export interface Publication {
