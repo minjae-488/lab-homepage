@@ -11,7 +11,7 @@ export interface ResearchProject {
     status: ProjectStatus;
     startDate?: string;
     endDate?: string;
-    fundingAgency?: string;
+    organizer?: string;
     keywords?: string[];
     relatedPublications?: string[];
 }

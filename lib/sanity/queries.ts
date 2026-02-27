@@ -64,7 +64,7 @@ export const researchProjectsQuery = groq`
     status,
     startDate,
     endDate,
-    fundingAgency,
+    organizer,
     keywords,
     relatedPublications[]->{
       _id,

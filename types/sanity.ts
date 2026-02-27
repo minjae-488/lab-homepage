@@ -45,7 +45,7 @@ export interface ResearchProject {
     status: 'ongoing' | 'completed';
     startDate: string;
     endDate?: string;
-    fundingAgency?: string;
+    organizer?: string;
     keywords?: string[];
     relatedPublications?: Publication[];
 }

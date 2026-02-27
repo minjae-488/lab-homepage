@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Calendar, CheckCircle, Clock, DollarSign } from 'lucide-react';
+import { Calendar, CheckCircle, Clock, Building2 } from 'lucide-react';
 import { ResearchProject } from '@/types/sanity';
 
 type ProjectStatus = 'ongoing' | 'completed';
@@ -113,13 +113,13 @@ export default function ResearchList({ projects }: ResearchListProps) {
                                     <p className="text-gray-900 ml-6">{duration}</p>
                                 </div>
 
-                                {project.fundingAgency && (
+                                {project.organizer && (
                                     <div>
                                         <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
-                                            <DollarSign className="h-4 w-4" />
-                                            <span className="font-medium">Funding</span>
+                                            <Building2 className="h-4 w-4" />
+                                            <span className="font-medium">주관기관</span>
                                         </div>
-                                        <p className="text-gray-900 ml-6">{project.fundingAgency}</p>
+                                        <p className="text-gray-900 ml-6">{project.organizer}</p>
                                     </div>
                                 )}
                             </div>

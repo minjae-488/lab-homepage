@@ -61,10 +61,10 @@ export default {
             hidden: ({ document }: any) => document?.status === 'ongoing',
         },
         {
-            name: 'fundingAgency',
-            title: 'Funding Agency (지원 기관)',
+            name: 'organizer',
+            title: 'Organizer (주관기관)',
             type: 'string',
-            description: '연구비 지원 기관 이름 (예: 한국연구재단, IITP)',
+            description: '연구 프로젝트를 주관하는 기관 이름 (예: 동아대학교 산학협력단, 한국연구재단)',
         },
         {
             name: 'keywords',
