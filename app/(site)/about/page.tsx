@@ -120,9 +120,11 @@ export default async function AboutPage() {
                             <div className="space-y-4">
                                 {professor.career.map((position, idx) => (
                                     <div key={idx} className="border-l-4 border-secondary-600 pl-4 py-2">
-                                        <div className="font-semibold text-gray-900">{position.position}</div>
-                                        <div className="text-gray-700">{position.institution}</div>
-                                        <div className="text-sm text-gray-600">{position.period}</div>
+                                        <div className="text-gray-900">
+                                            <span className="font-semibold">{position.position}</span>
+                                            {position.institution && <span className="text-gray-700"> {position.institution}</span>}
+                                            {position.period && <span className="text-gray-600"> {position.period}</span>}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
