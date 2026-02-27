@@ -55,7 +55,7 @@ export default async function AboutPage() {
                             <div className="flex-1">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-2">{professor.name}</h2>
                                 <p className="text-xl text-gray-600 mb-4">{professor.title}</p>
-                                <p className="text-gray-700 mb-6 leading-relaxed whitespace-pre-line">{professor.greeting}</p>
+                                <p className="text-gray-700 mb-6 leading-relaxed whitespace-pre-line break-words">{professor.greeting}</p>
                                 <div className="flex flex-wrap gap-4">
                                     {professor.email && (
                                         <a
