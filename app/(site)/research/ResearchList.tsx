@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Calendar, CheckCircle, Clock, Building2 } from 'lucide-react';
+import { Calendar, CheckCircle, Clock, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ResearchProject } from '@/types/sanity';
 
 type ProjectStatus = 'ongoing' | 'completed';
+
+const ITEMS_PER_PAGE = 10;
 
 interface ResearchListProps {
     projects: ResearchProject[];
@@ -13,6 +15,7 @@ interface ResearchListProps {
 
 export default function ResearchList({ projects }: ResearchListProps) {
     const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'all'>('all');
+    const [currentPage, setCurrentPage] = useState(1);
 
     const filteredProjects = selectedStatus === 'all'
         ? projects
@@ -20,6 +23,40 @@ export default function ResearchList({ projects }: ResearchListProps) {
 
     const ongoingProjects = projects.filter(p => p.status === 'ongoing');
     const completedProjects = projects.filter(p => p.status === 'completed');
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedStatus]);
+
+    // Pagination calculations
+    const totalPages = Math.max(1, Math.ceil(filteredProjects.length / ITEMS_PER_PAGE));
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+
+    // Generate page numbers to display
+    const getPageNumbers = () => {
+        const pages: (number | '...')[] = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i);
+        } else {
+            pages.push(1);
+            if (currentPage > 3) pages.push('...');
+            const start = Math.max(2, currentPage - 1);
+            const end = Math.min(totalPages - 1, currentPage + 1);
+            for (let i = start; i <= end; i++) pages.push(i);
+            if (currentPage < totalPages - 2) pages.push('...');
+            pages.push(totalPages);
+        }
+        return pages;
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <div className="section-container py-12">
@@ -70,7 +107,12 @@ export default function ResearchList({ projects }: ResearchListProps) {
 
             {/* Projects List */}
             <div className="space-y-8">
-                {filteredProjects.map((project) => {
+                {filteredProjects.length > 0 && (
+                    <div className="mb-4 text-sm text-gray-500">
+                        Showing {startIndex + 1}–{Math.min(endIndex, filteredProjects.length)} of {filteredProjects.length}
+                    </div>
+                )}
+                {paginatedProjects.map((project) => {
                     const duration = project.startDate
                         ? project.endDate
                             ? `${project.startDate} - ${project.endDate}`
@@ -164,6 +206,62 @@ export default function ResearchList({ projects }: ResearchListProps) {
                     </div>
                 )}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <nav className="mt-12 flex items-center justify-center gap-1" aria-label="Pagination">
+                    {/* Previous button */}
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                            disabled:opacity-40 disabled:cursor-not-allowed
+                            text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        aria-label="Previous page"
+                    >
+                        <ChevronLeft className="h-4 w-4 mr-1" />
+                        Prev
+                    </button>
+
+                    {/* Page numbers */}
+                    <div className="flex items-center gap-1">
+                        {getPageNumbers().map((page, idx) =>
+                            page === '...' ? (
+                                <span key={`dots-${idx}`} className="px-3 py-2 text-sm text-gray-400">
+                                    …
+                                </span>
+                            ) : (
+                                <button
+                                    key={page}
+                                    onClick={() => handlePageChange(page as number)}
+                                    className={`min-w-[2.5rem] px-3 py-2 text-sm font-medium rounded-md transition-colors
+                                        ${currentPage === page
+                                            ? 'bg-primary-600 text-white shadow-sm'
+                                            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                        }`}
+                                    aria-label={`Page ${page}`}
+                                    aria-current={currentPage === page ? 'page' : undefined}
+                                >
+                                    {page}
+                                </button>
+                            )
+                        )}
+                    </div>
+
+                    {/* Next button */}
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                            disabled:opacity-40 disabled:cursor-not-allowed
+                            text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        aria-label="Next page"
+                    >
+                        Next
+                        <ChevronRight className="h-4 w-4 ml-1" />
+                    </button>
+                </nav>
+            )}
         </div>
     );
 }

@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { Calendar, MapPin, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Calendar, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Event } from '@/types/sanity';
+
+const ITEMS_PER_PAGE = 10;
 
 interface EventsListProps {
     events: Event[];
@@ -11,6 +13,7 @@ interface EventsListProps {
 export default function EventsList({ events }: EventsListProps) {
     const [selectedType, setSelectedType] = useState<string>('All');
     const [searchQuery, setSearchQuery] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
 
     const eventTypes = ['All', ...Array.from(new Set(events.map(event => event.type)))];
 
@@ -29,6 +32,44 @@ export default function EventsList({ events }: EventsListProps) {
 
     const upcomingEvents = filteredEvents.filter(event => isUpcoming(event.startDate));
     const pastEvents = filteredEvents.filter(event => !isUpcoming(event.startDate)).reverse(); // Show recent past events first
+    const sortedEvents = [...upcomingEvents, ...pastEvents];
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedType, searchQuery]);
+
+    // Pagination calculations
+    const totalPages = Math.max(1, Math.ceil(sortedEvents.length / ITEMS_PER_PAGE));
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedEvents = sortedEvents.slice(startIndex, endIndex);
+    
+    // Split back for display formatting
+    const paginatedUpcoming = paginatedEvents.filter(event => isUpcoming(event.startDate));
+    const paginatedPast = paginatedEvents.filter(event => !isUpcoming(event.startDate));
+
+    // Generate page numbers to display
+    const getPageNumbers = () => {
+        const pages: (number | '...')[] = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i);
+        } else {
+            pages.push(1);
+            if (currentPage > 3) pages.push('...');
+            const start = Math.max(2, currentPage - 1);
+            const end = Math.min(totalPages - 1, currentPage + 1);
+            for (let i = start; i <= end; i++) pages.push(i);
+            if (currentPage < totalPages - 2) pages.push('...');
+            pages.push(totalPages);
+        }
+        return pages;
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <div className="section-container py-12">
@@ -61,15 +102,21 @@ export default function EventsList({ events }: EventsListProps) {
                 </div>
             </div>
 
+            {sortedEvents.length > 0 && (
+                <div className="mb-6 text-sm text-gray-500">
+                    Showing {startIndex + 1}–{Math.min(endIndex, sortedEvents.length)} of {sortedEvents.length}
+                </div>
+            )}
+
             {/* Upcoming Events */}
-            {upcomingEvents.length > 0 && (
+            {paginatedUpcoming.length > 0 && (
                 <div className="mb-16">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                         <Calendar className="mr-2 h-6 w-6 text-primary-600" />
                         Upcoming Events
                     </h2>
                     <div className="grid gap-6">
-                        {upcomingEvents.map(event => (
+                        {paginatedUpcoming.map(event => (
                             <EventCard key={event._id} event={event} />
                         ))}
                     </div>
@@ -77,24 +124,77 @@ export default function EventsList({ events }: EventsListProps) {
             )}
 
             {/* Past Events */}
-            {pastEvents.length > 0 && (
+            {paginatedPast.length > 0 && (
                 <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center text-gray-500">
                         <Calendar className="mr-2 h-6 w-6" />
                         Past Events
                     </h2>
                     <div className="grid gap-6 opacity-80 hover:opacity-100 transition-opacity">
-                        {pastEvents.map(event => (
+                        {paginatedPast.map(event => (
                             <EventCard key={event._id} event={event} />
                         ))}
                     </div>
                 </div>
             )}
 
-            {filteredEvents.length === 0 && (
+            {sortedEvents.length === 0 && (
                 <div className="text-center py-12 text-gray-500 bg-gray-50 rounded-lg">
                     No events found matching your criteria.
                 </div>
+            )}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <nav className="mt-12 flex items-center justify-center gap-1" aria-label="Pagination">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                            disabled:opacity-40 disabled:cursor-not-allowed
+                            text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        aria-label="Previous page"
+                    >
+                        <ChevronLeft className="h-4 w-4 mr-1" />
+                        Prev
+                    </button>
+
+                    <div className="flex items-center gap-1">
+                        {getPageNumbers().map((page, idx) =>
+                            page === '...' ? (
+                                <span key={`dots-${idx}`} className="px-3 py-2 text-sm text-gray-400">
+                                    …
+                                </span>
+                            ) : (
+                                <button
+                                    key={page}
+                                    onClick={() => handlePageChange(page as number)}
+                                    className={`min-w-[2.5rem] px-3 py-2 text-sm font-medium rounded-md transition-colors
+                                        ${currentPage === page
+                                            ? 'bg-primary-600 text-white shadow-sm'
+                                            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                        }`}
+                                    aria-label={`Page ${page}`}
+                                    aria-current={currentPage === page ? 'page' : undefined}
+                                >
+                                    {page}
+                                </button>
+                            )
+                        )}
+                    </div>
+
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                            disabled:opacity-40 disabled:cursor-not-allowed
+                            text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        aria-label="Next page"
+                    >
+                        Next
+                        <ChevronRight className="h-4 w-4 ml-1" />
+                    </button>
+                </nav>
             )}
         </div>
     );
