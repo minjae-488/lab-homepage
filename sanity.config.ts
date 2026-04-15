@@ -5,9 +5,6 @@ import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './sanity/schemas'
 import { projectId, dataset } from './lib/sanity/env'
 
-// Studio가 iframe으로 로드할 미리보기 URL: 상대 경로 '/'는 항상 현재 도메인을 사용
-const previewUrl = '/'
-
 export default defineConfig({
     basePath: '/studio',
     name: 'Lab_Homepage_Studio',
@@ -66,5 +63,17 @@ export default defineConfig({
 
     schema: {
         types: schemaTypes,
+    },
+
+    // publication 문서 편집 화면에서 기본 액션(Delete 포함)을 모두 표시
+    // Sanity Studio v3의 기본 액션에는 이미 Delete가 포함되어 있으며
+    // 문서 상단 오른쪽의 "..." 드롭다운 메뉴에서 접근 가능합니다
+    document: {
+        actions: (prev, { schemaType }) => {
+            if (schemaType === 'publication') {
+                return prev  // 기본 액션 전체 유지 (Publish, Delete 등 모두 포함)
+            }
+            return prev
+        },
     },
 })

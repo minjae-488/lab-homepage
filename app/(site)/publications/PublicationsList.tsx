@@ -1,16 +1,19 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, FileText, ExternalLink, Calendar, Users } from 'lucide-react';
+import { ArrowLeft, FileText, ExternalLink, Calendar, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Publication } from '@/types/sanity';
 
 type PublicationType = 'conference' | 'journal' | 'workshop';
+
+const ITEMS_PER_PAGE = 10;
 
 export default function PublicationsList({ publications }: { publications: Publication[] }) {
     const [selectedType, setSelectedType] = useState<PublicationType | 'all'>('all');
     const [selectedYear, setSelectedYear] = useState<number | 'all'>('all');
     const [sortBy, setSortBy] = useState<'date' | 'citations'>('date');
+    const [currentPage, setCurrentPage] = useState(1);
 
     // Get unique years
     const years = useMemo(() => {
@@ -43,6 +46,40 @@ export default function PublicationsList({ publications }: { publications: Publi
 
         return filtered;
     }, [selectedType, selectedYear, sortBy, publications]);
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedType, selectedYear, sortBy]);
+
+    // Pagination calculations
+    const totalPages = Math.max(1, Math.ceil(filteredPublications.length / ITEMS_PER_PAGE));
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedPublications = filteredPublications.slice(startIndex, endIndex);
+
+    // Generate page numbers to display
+    const getPageNumbers = () => {
+        const pages: (number | '...')[] = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i);
+        } else {
+            pages.push(1);
+            if (currentPage > 3) pages.push('...');
+            const start = Math.max(2, currentPage - 1);
+            const end = Math.min(totalPages - 1, currentPage + 1);
+            for (let i = start; i <= end; i++) pages.push(i);
+            if (currentPage < totalPages - 2) pages.push('...');
+            pages.push(totalPages);
+        }
+        return pages;
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Scroll to top of the publications list
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     const typeColors: Record<PublicationType, string> = {
         conference: 'bg-primary-100 text-primary-800',
@@ -119,9 +156,16 @@ export default function PublicationsList({ publications }: { publications: Publi
                     </div>
                 </div>
 
+                {/* Showing info */}
+                {filteredPublications.length > 0 && (
+                    <div className="mb-4 text-sm text-gray-500">
+                        Showing {startIndex + 1}–{Math.min(endIndex, filteredPublications.length)} of {filteredPublications.length}
+                    </div>
+                )}
+
                 {/* Publications List */}
                 <div className="space-y-6">
-                    {filteredPublications.map((pub) => {
+                    {paginatedPublications.map((pub) => {
                         const venue = pub.venue || 'Unknown Venue';
 
                         return (
@@ -205,6 +249,62 @@ export default function PublicationsList({ publications }: { publications: Publi
                         </div>
                     )}
                 </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <nav className="mt-12 flex items-center justify-center gap-1" aria-label="Pagination">
+                        {/* Previous button */}
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                                disabled:opacity-40 disabled:cursor-not-allowed
+                                text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            aria-label="Previous page"
+                        >
+                            <ChevronLeft className="h-4 w-4 mr-1" />
+                            Prev
+                        </button>
+
+                        {/* Page numbers */}
+                        <div className="flex items-center gap-1">
+                            {getPageNumbers().map((page, idx) =>
+                                page === '...' ? (
+                                    <span key={`dots-${idx}`} className="px-3 py-2 text-sm text-gray-400">
+                                        …
+                                    </span>
+                                ) : (
+                                    <button
+                                        key={page}
+                                        onClick={() => handlePageChange(page as number)}
+                                        className={`min-w-[2.5rem] px-3 py-2 text-sm font-medium rounded-md transition-colors
+                                            ${currentPage === page
+                                                ? 'bg-primary-600 text-white shadow-sm'
+                                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                            }`}
+                                        aria-label={`Page ${page}`}
+                                        aria-current={currentPage === page ? 'page' : undefined}
+                                    >
+                                        {page}
+                                    </button>
+                                )
+                            )}
+                        </div>
+
+                        {/* Next button */}
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors
+                                disabled:opacity-40 disabled:cursor-not-allowed
+                                text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            aria-label="Next page"
+                        >
+                            Next
+                            <ChevronRight className="h-4 w-4 ml-1" />
+                        </button>
+                    </nav>
+                )}
             </div>
         </div>
     );
