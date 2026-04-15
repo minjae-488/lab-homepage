@@ -17,10 +17,18 @@ const nextConfig = {
     async headers() {
         return [
             {
-                source: "/(.*)",
+                // /studio 경로는 sanity.io에서 iframe으로 로드될 수 있도록 허용
+                source: "/studio(.*)",
                 headers: [
-                    { key: "X-Frame-Options", value: "SAMEORIGIN" }, // Allow iframe embedding on same origin
-                    { key: "Content-Security-Policy", value: "frame-ancestors 'self' https://lab-homepage-beryl.vercel.app https://*.vercel.app http://localhost:3000" } // Allow embedding from self, production, vercel previews, and localhost
+                    { key: "Content-Security-Policy", value: "frame-ancestors 'self' https://www.sanity.io https://*.sanity.io https://lab-homepage-beryl.vercel.app https://*.vercel.app http://localhost:3000 http://localhost:3333" }
+                ]
+            },
+            {
+                // 나머지 페이지는 기존 보안 설정 유지
+                source: "/((?!studio).*)",
+                headers: [
+                    { key: "X-Frame-Options", value: "SAMEORIGIN" },
+                    { key: "Content-Security-Policy", value: "frame-ancestors 'self' https://lab-homepage-beryl.vercel.app https://*.vercel.app http://localhost:3000" }
                 ]
             }
         ]
